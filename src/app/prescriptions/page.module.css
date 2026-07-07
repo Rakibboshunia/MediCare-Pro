@@ -1,0 +1,22 @@
+.container { display: flex; flex-direction: column; gap: 1.5rem; }
+.header { display: flex; justify-content: space-between; align-items: center; }
+.title { font-size: 1.75rem; font-weight: 700; color: var(--text-primary); }
+.addButton { padding: 0.75rem 1.25rem; background: var(--accent-primary); color: white; border-radius: 12px; font-weight: 600; transition: opacity 0.2s; }
+.addButton:hover { opacity: 0.9; }
+.content { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem; min-height: 400px; }
+.searchBar { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-muted); }
+.searchInput { flex: 1; background: transparent; border: none; color: var(--text-primary); outline: none; }
+.tableContainer { overflow-x: auto; margin-top: 1rem; }
+.table { width: 100%; border-collapse: collapse; text-align: left; }
+.table th { padding: 1rem; color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border-color); }
+.table td { padding: 1rem; border-bottom: 1px solid var(--border-color); color: var(--text-primary); vertical-align: middle; }
+.rxId { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; color: var(--accent-primary); }
+.patientName { font-weight: 500; }
+.statusBadge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; }
+.statusActive { background: var(--success-light); color: var(--success); }
+.statusCompleted { background: var(--bg-secondary); color: var(--text-muted); }
+.actions { display: flex; align-items: center; gap: 0.75rem; }
+.actionButton { padding: 0.25rem 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: transparent; color: var(--text-primary); cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: all 0.2s; }
+.actionButton:hover { background: var(--bg-secondary); }
+.iconButton { background: transparent; color: var(--text-muted); border: none; cursor: pointer; padding: 0.25rem; border-radius: 6px; transition: all 0.2s; display: flex; align-items: center; }
+.iconButton:hover { color: var(--text-primary); background: var(--bg-secondary); }
