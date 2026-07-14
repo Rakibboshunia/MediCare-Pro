@@ -37,7 +37,7 @@ export default function Dashboard() {
     ));
   };
 
-  const userName = 'Dr. Admin';
+  const userName = 'Dr. Boshunia';
 
   return (
     <div className="flex flex-col gap-8">
@@ -49,7 +49,7 @@ export default function Dashboard() {
               <SparklesIcon className="w-5 h-5 text-warning" />
               <span className="text-sm font-semibold tracking-wider text-white/90 uppercase">Welcome Back</span>
             </div>
-            <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-white">Good Morning, Dr. Admin</h1>
+            <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-white">Good Morning, Dr. Boshunia</h1>
             <p className="text-white/80 text-sm md:text-base">You have <strong className="text-white">86</strong> appointments today and <strong className="text-white">12</strong> pending reports. Have a great day ahead!</p>
           </div>
           <button className="px-5 py-2.5 bg-white text-accent-primary rounded-xl font-bold transition-all hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 shrink-0">

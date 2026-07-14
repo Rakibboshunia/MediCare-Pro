@@ -100,7 +100,7 @@ export default function Sidebar() {
             className="w-10 h-10 rounded-xl object-cover border-2 border-border shrink-0 bg-white"
           />
           <div className="flex flex-col overflow-hidden">
-            <span className="font-semibold text-sm text-text-primary truncate">Dr. Admin</span>
+            <span className="font-semibold text-sm text-text-primary truncate">Dr. Boshunia</span>
             <span className="text-xs text-text-muted truncate">Administrator</span>
           </div>
         </div>
