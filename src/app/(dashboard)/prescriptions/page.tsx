@@ -5,11 +5,12 @@ import { MagnifyingGlassIcon, DocumentTextIcon, PrinterIcon } from '@heroicons/r
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialPrescriptions = [
-  { id: 'RX-701', patient: 'Sarah Jenkins', doctor: 'Dr. Felix', date: '2023-11-15', medications: 3, status: 'Active' },
-  { id: 'RX-702', patient: 'Michael Chen', doctor: 'Dr. Smith', date: '2023-11-10', medications: 1, status: 'Completed' },
-  { id: 'RX-703', patient: 'Emma Watson', doctor: 'Dr. Jane', date: '2023-11-05', medications: 2, status: 'Active' },
-  { id: 'RX-704', patient: 'James Smith', doctor: 'Dr. Brown', date: '2023-10-28', medications: 4, status: 'Completed' },
-  { id: 'RX-705', patient: 'Olivia Davis', doctor: 'Dr. Felix', date: '2023-10-20', medications: 2, status: 'Active' },
+  { id: 'RX-2501', patient: 'Fatema Akter', doctor: 'Dr. Rashida Khanam', date: '2025-07-10', medications: 3, status: 'Active' },
+  { id: 'RX-2502', patient: 'Rafiqul Islam', doctor: 'Dr. Karim Hossain', date: '2025-07-08', medications: 2, status: 'Completed' },
+  { id: 'RX-2503', patient: 'Sumaiya Begum', doctor: 'Dr. Nusrat Jahan', date: '2025-07-05', medications: 2, status: 'Active' },
+  { id: 'RX-2504', patient: 'Jahangir Alam', doctor: 'Dr. Iftekhar Ahmed', date: '2025-07-12', medications: 4, status: 'Completed' },
+  { id: 'RX-2505', patient: 'Nasrin Parvin', doctor: 'Dr. Sabrina Sultana', date: '2025-07-11', medications: 1, status: 'Active' },
+  { id: 'RX-2506', patient: 'Mizanur Rahman', doctor: 'Dr. Mahbubur Rahman', date: '2025-07-09', medications: 3, status: 'Active' },
 ];
 
 export default function Prescriptions() {

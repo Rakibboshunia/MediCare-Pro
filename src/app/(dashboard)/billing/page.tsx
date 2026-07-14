@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { MagnifyingGlassIcon, DocumentTextIcon, BanknotesIcon, ArrowDownTrayIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
 
 const initialInvoices = [
-  { id: 'INV-2023-001', patient: 'Sarah Jenkins', date: '2023-11-15', amount: '$150.00', status: 'Paid' },
-  { id: 'INV-2023-002', patient: 'Michael Chen', date: '2023-11-14', amount: '$1,200.00', status: 'Pending' },
-  { id: 'INV-2023-003', patient: 'Emma Watson', date: '2023-11-12', amount: '$350.00', status: 'Paid' },
-  { id: 'INV-2023-004', patient: 'James Smith', date: '2023-11-10', amount: '$4,500.00', status: 'Overdue' },
-  { id: 'INV-2023-005', patient: 'Olivia Davis', date: '2023-11-09', amount: '$85.00', status: 'Paid' },
+  { id: 'INV-2025-001', patient: 'Fatema Akter', date: '2025-07-10', amount: '৳ 2,500', status: 'Paid' },
+  { id: 'INV-2025-002', patient: 'Rafiqul Islam', date: '2025-07-08', amount: '৳ 15,000', status: 'Pending' },
+  { id: 'INV-2025-003', patient: 'Sumaiya Begum', date: '2025-07-05', amount: '৳ 4,800', status: 'Paid' },
+  { id: 'INV-2025-004', patient: 'Jahangir Alam', date: '2025-07-12', amount: '৳ 32,000', status: 'Overdue' },
+  { id: 'INV-2025-005', patient: 'Nasrin Parvin', date: '2025-07-11', amount: '৳ 1,200', status: 'Paid' },
+  { id: 'INV-2025-006', patient: 'Mizanur Rahman', date: '2025-07-09', amount: '৳ 8,500', status: 'Pending' },
+  { id: 'INV-2025-007', patient: 'Kamal Uddin', date: '2025-07-13', amount: '৳ 22,000', status: 'Paid' },
 ];
 
 export default function Billing() {

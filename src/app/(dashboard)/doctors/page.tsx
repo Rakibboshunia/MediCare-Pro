@@ -5,10 +5,12 @@ import { MagnifyingGlassIcon, EllipsisVerticalIcon, UserPlusIcon } from '@heroic
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialDoctors = [
-  { id: 'DR-001', name: 'Dr. Felix', specialty: 'General Medicine', phone: '+1 234-567-8901', experience: '12 Years', status: 'Available', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix' },
-  { id: 'DR-002', name: 'Dr. Smith', specialty: 'Cardiology', phone: '+1 234-567-8902', experience: '15 Years', status: 'In Surgery', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Smith' },
-  { id: 'DR-003', name: 'Dr. Jane', specialty: 'Dental', phone: '+1 234-567-8903', experience: '8 Years', status: 'Available', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jane' },
-  { id: 'DR-004', name: 'Dr. Brown', specialty: 'Orthopedics', phone: '+1 234-567-8904', experience: '20 Years', status: 'Off Duty', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Brown' },
+  { id: 'DR-001', name: 'Dr. Rashida Khanam', specialty: 'General Medicine', phone: '+880 1711-234567', experience: '14 Years', status: 'Available', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rashida' },
+  { id: 'DR-002', name: 'Dr. Karim Hossain', specialty: 'Cardiology', phone: '+880 1812-345678', experience: '18 Years', status: 'In Surgery', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Karim' },
+  { id: 'DR-003', name: 'Dr. Nusrat Jahan', specialty: 'Dental', phone: '+880 1913-456789', experience: '9 Years', status: 'Available', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nusrat' },
+  { id: 'DR-004', name: 'Dr. Iftekhar Ahmed', specialty: 'Orthopedics', phone: '+880 1614-567890', experience: '22 Years', status: 'Off Duty', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Iftekhar' },
+  { id: 'DR-005', name: 'Dr. Sabrina Sultana', specialty: 'Neurology', phone: '+880 1715-678901', experience: '11 Years', status: 'Available', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sabrina' },
+  { id: 'DR-006', name: 'Dr. Mahbubur Rahman', specialty: 'Pediatrics', phone: '+880 1816-789012', experience: '16 Years', status: 'Available', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mahbubur' },
 ];
 
 export default function Doctors() {

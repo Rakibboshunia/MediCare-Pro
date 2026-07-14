@@ -5,11 +5,12 @@ import { MagnifyingGlassIcon, EllipsisVerticalIcon, CalendarIcon, ClockIcon } fr
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialAppointments = [
-  { id: 'APT-101', patient: 'Sarah Jenkins', doctor: 'Dr. Felix', department: 'General Medicine', date: '2023-11-15', time: '09:00 AM', status: 'Completed', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah' },
-  { id: 'APT-102', patient: 'Michael Chen', doctor: 'Dr. Smith', department: 'Cardiology', date: '2023-11-15', time: '10:30 AM', status: 'In Progress', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Michael' },
-  { id: 'APT-103', patient: 'Emma Watson', doctor: 'Dr. Jane', department: 'Dental', date: '2023-11-15', time: '11:15 AM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emma' },
-  { id: 'APT-104', patient: 'James Smith', doctor: 'Dr. Brown', department: 'Orthopedics', date: '2023-11-16', time: '02:00 PM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=James' },
-  { id: 'APT-105', patient: 'Olivia Davis', doctor: 'Dr. Felix', department: 'General Medicine', date: '2023-11-16', time: '03:30 PM', status: 'Cancelled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Olivia' },
+  { id: 'APT-2501', patient: 'Fatema Akter', doctor: 'Dr. Rashida Khanam', department: 'General Medicine', date: '2025-07-15', time: '09:00 AM', status: 'Completed', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatema' },
+  { id: 'APT-2502', patient: 'Rafiqul Islam', doctor: 'Dr. Karim Hossain', department: 'Cardiology', date: '2025-07-15', time: '10:30 AM', status: 'In Progress', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rafiqul' },
+  { id: 'APT-2503', patient: 'Sumaiya Begum', doctor: 'Dr. Nusrat Jahan', department: 'Dental', date: '2025-07-15', time: '11:15 AM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sumaiya' },
+  { id: 'APT-2504', patient: 'Jahangir Alam', doctor: 'Dr. Iftekhar Ahmed', department: 'Orthopedics', date: '2025-07-16', time: '02:00 PM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jahangir' },
+  { id: 'APT-2505', patient: 'Nasrin Parvin', doctor: 'Dr. Sabrina Sultana', department: 'Neurology', date: '2025-07-16', time: '03:30 PM', status: 'Cancelled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nasrin' },
+  { id: 'APT-2506', patient: 'Mizanur Rahman', doctor: 'Dr. Mahbubur Rahman', department: 'Pediatrics', date: '2025-07-17', time: '09:45 AM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mizanur' },
 ];
 
 export default function Appointments() {

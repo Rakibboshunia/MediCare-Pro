@@ -5,11 +5,12 @@ import { MagnifyingGlassIcon, PlusIcon, DocumentArrowDownIcon, CheckCircleIcon, 
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialTests = [
-  { id: 'LAB-001', patient: 'Sarah Jenkins', testName: 'Complete Blood Count', doctor: 'Dr. Felix', date: '2023-11-15', status: 'Completed' },
-  { id: 'LAB-002', patient: 'Michael Chen', testName: 'Lipid Profile', doctor: 'Dr. Smith', date: '2023-11-15', status: 'In Progress' },
-  { id: 'LAB-003', patient: 'Emma Watson', testName: 'X-Ray (Chest)', doctor: 'Dr. Jane', date: '2023-11-16', status: 'Pending' },
-  { id: 'LAB-004', patient: 'James Smith', testName: 'MRI Scan', doctor: 'Dr. Brown', date: '2023-11-14', status: 'Completed' },
-  { id: 'LAB-005', patient: 'Olivia Davis', testName: 'Urine Analysis', doctor: 'Dr. Felix', date: '2023-11-16', status: 'Pending' },
+  { id: 'LAB-2501', patient: 'Fatema Akter', testName: 'Complete Blood Count (CBC)', doctor: 'Dr. Rashida Khanam', date: '2025-07-10', status: 'Completed' },
+  { id: 'LAB-2502', patient: 'Rafiqul Islam', testName: 'Lipid Profile', doctor: 'Dr. Karim Hossain', date: '2025-07-12', status: 'In Progress' },
+  { id: 'LAB-2503', patient: 'Sumaiya Begum', testName: 'X-Ray (Chest)', doctor: 'Dr. Nusrat Jahan', date: '2025-07-13', status: 'Pending' },
+  { id: 'LAB-2504', patient: 'Jahangir Alam', testName: 'MRI Scan (Knee)', doctor: 'Dr. Iftekhar Ahmed', date: '2025-07-11', status: 'Completed' },
+  { id: 'LAB-2505', patient: 'Nasrin Parvin', testName: 'EEG (Brain Activity)', doctor: 'Dr. Sabrina Sultana', date: '2025-07-14', status: 'Pending' },
+  { id: 'LAB-2506', patient: 'Mizanur Rahman', testName: 'Blood Glucose (Fasting)', doctor: 'Dr. Mahbubur Rahman', date: '2025-07-09', status: 'Completed' },
 ];
 
 export default function Laboratory() {

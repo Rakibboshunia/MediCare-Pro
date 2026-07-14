@@ -5,11 +5,13 @@ import { MagnifyingGlassIcon, PlusIcon, BeakerIcon, ExclamationTriangleIcon, Tra
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialInventory = [
-  { id: 'MED-001', name: 'Paracetamol 500mg', category: 'Painkiller', stock: 1250, unit: 'Tablets', status: 'In Stock', expiry: '2025-08-12' },
-  { id: 'MED-002', name: 'Amoxicillin 250mg', category: 'Antibiotic', stock: 45, unit: 'Capsules', status: 'Low Stock', expiry: '2024-11-30' },
-  { id: 'MED-003', name: 'Ibuprofen 400mg', category: 'Painkiller', stock: 800, unit: 'Tablets', status: 'In Stock', expiry: '2025-05-20' },
-  { id: 'MED-004', name: 'Cough Syrup', category: 'Syrup', stock: 0, unit: 'Bottles', status: 'Out of Stock', expiry: '2024-02-15' },
-  { id: 'MED-005', name: 'Vitamin C 1000mg', category: 'Supplement', stock: 320, unit: 'Tablets', status: 'In Stock', expiry: '2026-01-10' },
+  { id: 'MED-001', name: 'Napa 500mg (Paracetamol)', category: 'Painkiller', stock: 3200, unit: 'Tablets', status: 'In Stock', expiry: '2026-06-30' },
+  { id: 'MED-002', name: 'Amoxil 250mg (Amoxicillin)', category: 'Antibiotic', stock: 38, unit: 'Capsules', status: 'Low Stock', expiry: '2025-12-15' },
+  { id: 'MED-003', name: 'Seclo 20mg (Omeprazole)', category: 'Antacid', stock: 950, unit: 'Capsules', status: 'In Stock', expiry: '2026-03-20' },
+  { id: 'MED-004', name: 'Tusi Syrup (Cough)', category: 'Syrup', stock: 0, unit: 'Bottles', status: 'Out of Stock', expiry: '2025-09-10' },
+  { id: 'MED-005', name: 'Vitamin C 500mg', category: 'Supplement', stock: 1800, unit: 'Tablets', status: 'In Stock', expiry: '2027-01-01' },
+  { id: 'MED-006', name: 'Metformin 500mg', category: 'Antidiabetic', stock: 620, unit: 'Tablets', status: 'In Stock', expiry: '2026-09-18' },
+  { id: 'MED-007', name: 'Amlodipine 5mg', category: 'Cardiac', stock: 22, unit: 'Tablets', status: 'Low Stock', expiry: '2025-11-25' },
 ];
 
 export default function Pharmacy() {

@@ -21,10 +21,10 @@ const stats = [
 ];
 
 const initialAppointments = [
-  { id: 1, patient: 'Sarah Jenkins', type: 'General Checkup', time: '09:00 AM', status: 'Completed', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah' },
-  { id: 2, patient: 'Michael Chen', type: 'Cardiology', time: '10:30 AM', status: 'Upcoming', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Michael' },
-  { id: 3, patient: 'Emma Watson', type: 'Dental', time: '11:15 AM', status: 'Upcoming', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emma' },
-  { id: 4, patient: 'James Smith', type: 'Orthopedics', time: '02:00 PM', status: 'Upcoming', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=James' },
+  { id: 1, patient: 'Fatema Akter', type: 'General Medicine', time: '09:00 AM', status: 'Completed', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatema' },
+  { id: 2, patient: 'Rafiqul Islam', type: 'Cardiology', time: '10:30 AM', status: 'Upcoming', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rafiqul' },
+  { id: 3, patient: 'Sumaiya Begum', type: 'Dental', time: '11:15 AM', status: 'Upcoming', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sumaiya' },
+  { id: 4, patient: 'Jahangir Alam', type: 'Orthopedics', time: '02:00 PM', status: 'Upcoming', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jahangir' },
 ];
 
 export default function Dashboard() {

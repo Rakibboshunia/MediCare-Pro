@@ -5,11 +5,14 @@ import { MagnifyingGlassIcon, EllipsisVerticalIcon } from '@heroicons/react/24/o
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialPatients = [
-  { id: 'PT-001', name: 'Sarah Jenkins', age: 34, gender: 'Female', bloodGroup: 'O+', lastVisit: '2023-10-15', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah' },
-  { id: 'PT-002', name: 'Michael Chen', age: 45, gender: 'Male', bloodGroup: 'A-', lastVisit: '2023-10-20', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Michael' },
-  { id: 'PT-003', name: 'Emma Watson', age: 28, gender: 'Female', bloodGroup: 'B+', lastVisit: '2023-11-02', status: 'Inactive', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emma' },
-  { id: 'PT-004', name: 'James Smith', age: 52, gender: 'Male', bloodGroup: 'AB+', lastVisit: '2023-11-05', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=James' },
-  { id: 'PT-005', name: 'Olivia Davis', age: 41, gender: 'Female', bloodGroup: 'O-', lastVisit: '2023-11-10', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Olivia' },
+  { id: 'PT-001', name: 'Fatema Akter', age: 34, gender: 'Female', bloodGroup: 'O+', lastVisit: '2025-07-10', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatema' },
+  { id: 'PT-002', name: 'Rafiqul Islam', age: 47, gender: 'Male', bloodGroup: 'A-', lastVisit: '2025-07-08', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rafiqul' },
+  { id: 'PT-003', name: 'Sumaiya Begum', age: 29, gender: 'Female', bloodGroup: 'B+', lastVisit: '2025-07-05', status: 'Inactive', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sumaiya' },
+  { id: 'PT-004', name: 'Jahangir Alam', age: 55, gender: 'Male', bloodGroup: 'AB+', lastVisit: '2025-07-12', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jahangir' },
+  { id: 'PT-005', name: 'Nasrin Parvin', age: 42, gender: 'Female', bloodGroup: 'O-', lastVisit: '2025-07-11', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nasrin' },
+  { id: 'PT-006', name: 'Mizanur Rahman', age: 38, gender: 'Male', bloodGroup: 'A+', lastVisit: '2025-07-09', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mizanur' },
+  { id: 'PT-007', name: 'Shahnaz Akhter', age: 61, gender: 'Female', bloodGroup: 'B-', lastVisit: '2025-07-07', status: 'Inactive', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Shahnaz' },
+  { id: 'PT-008', name: 'Kamal Uddin', age: 50, gender: 'Male', bloodGroup: 'AB-', lastVisit: '2025-07-13', status: 'Active', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Kamal' },
 ];
 
 export default function Patients() {
