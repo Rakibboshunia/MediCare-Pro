@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn } from 'next-auth/react';
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,27 +13,12 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
 
-    try {
-      const res = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
-      });
-
-      if (res?.error) {
-        setError('Invalid email or password');
-        setLoading(false);
-      } else {
-        router.push('/');
-        router.refresh();
-      }
-    } catch {
-      setError('An unexpected error occurred');
-      setLoading(false);
-    }
+    // Dummy authentication delay
+    setTimeout(() => {
+      router.push('/');
+    }, 800);
   };
 
   const inputClass = "w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm outline-none transition-all focus:border-purple-400 focus:shadow-[0_0_0_2px_rgba(168,85,247,0.3)] placeholder:text-white/40";

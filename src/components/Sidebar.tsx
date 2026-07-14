@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import {
   HomeIcon,
   UsersIcon,
@@ -37,7 +36,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const { isMobileMenuOpen, setIsMobileMenuOpen } = useMobileNav();
 
   return (
@@ -97,13 +95,13 @@ export default function Sidebar() {
         {/* User Footer */}
         <div className="flex items-center gap-3 px-4 py-4 border-t border-border mt-auto">
           <img
-            src={session?.user?.image || "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin&backgroundColor=b6e3f4"}
+            src="https://api.dicebear.com/7.x/avataaars/svg?seed=Admin&backgroundColor=b6e3f4"
             alt="Profile"
-            className="w-10 h-10 rounded-xl object-cover border-2 border-border shrink-0"
+            className="w-10 h-10 rounded-xl object-cover border-2 border-border shrink-0 bg-white"
           />
           <div className="flex flex-col overflow-hidden">
-            <span className="font-semibold text-sm text-text-primary truncate">{session?.user?.name || 'Dr. Felix'}</span>
-            <span className="text-xs text-text-muted truncate">{session?.user?.email ? 'Administrator' : 'Chief Medical Officer'}</span>
+            <span className="font-semibold text-sm text-text-primary truncate">Dr. Admin</span>
+            <span className="text-xs text-text-muted truncate">Administrator</span>
           </div>
         </div>
       </aside>

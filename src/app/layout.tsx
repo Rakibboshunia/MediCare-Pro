@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import AuthProvider from '@/components/AuthProvider';
 import { ThemeProvider } from '@/components/ThemeProvider';
 export const metadata: Metadata = {
   title: 'MediCare Pro | Hospital Management',
@@ -16,9 +15,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

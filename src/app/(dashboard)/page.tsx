@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { 
   UsersIcon, 
   UserGroupIcon, 
@@ -30,7 +29,6 @@ const initialAppointments = [
 
 export default function Dashboard() {
   const router = useRouter();
-  const { data: session } = useSession();
   const [appointments, setAppointments] = useState(initialAppointments);
 
   const markAsCompleted = (id: number) => {
@@ -39,7 +37,7 @@ export default function Dashboard() {
     ));
   };
 
-  const userName = session?.user?.name || 'Dr. Felix';
+  const userName = 'Dr. Admin';
 
   return (
     <div className="flex flex-col gap-8">

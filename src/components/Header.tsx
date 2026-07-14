@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { signOut, useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import { useMobileNav } from '@/components/MobileNavProvider';
 import {
@@ -15,7 +14,6 @@ import {
 } from '@heroicons/react/24/outline';
 
 export default function Header() {
-  const { data: session } = useSession();
   const { theme, setTheme } = useTheme();
   const { toggleMobileMenu } = useMobileNav();
   const [mounted, setMounted] = useState(false);
@@ -141,15 +139,13 @@ export default function Header() {
         </div>
 
         {/* Sign Out */}
-        {session && (
-          <button
-            className="w-10 h-10 flex items-center justify-center bg-transparent border border-border rounded-xl text-text-muted transition-all hover:bg-danger-light hover:text-danger hover:border-danger cursor-pointer"
-            title="Sign Out"
-            onClick={() => signOut({ callbackUrl: '/login' })}
-          >
-            <ArrowRightOnRectangleIcon className="w-5 h-5" />
-          </button>
-        )}
+        <button
+          className="w-10 h-10 flex items-center justify-center bg-transparent border border-border rounded-xl text-text-muted transition-all hover:bg-danger-light hover:text-danger hover:border-danger cursor-pointer"
+          title="Sign Out"
+          onClick={() => window.location.href = '/login'}
+        >
+          <ArrowRightOnRectangleIcon className="w-5 h-5" />
+        </button>
       </div>
     </header>
   );
