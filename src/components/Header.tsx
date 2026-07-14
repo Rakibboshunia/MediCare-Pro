@@ -76,9 +76,10 @@ export default function Header() {
               </div>
               <div className="flex flex-col">
                 {[
-                  { avatar: 'D', title: 'Dr. Smith', desc: 'Please review patient PT-001\'s report.', time: '2m ago' },
-                  { avatar: 'A', title: 'Admin', desc: 'Meeting at 3 PM.', time: '1h ago' },
-                ].map((item) => (
+                   { avatar: 'K', title: 'Dr. Karim Hossain', desc: "Please review patient PT-002's Lipid Profile report.", time: '5m ago' },
+                   { avatar: 'R', title: 'Dr. Rashida Khanam', desc: 'Patient Fatema Akter needs follow-up appointment.', time: '1h ago' },
+                   { avatar: 'A', title: 'Admin Office', desc: 'Staff meeting scheduled at 3 PM today.', time: '2h ago' },
+                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-3 px-4 py-3 border-b border-border transition-colors hover:bg-bg-primary cursor-pointer">
                     <div className="w-9 h-9 rounded-full bg-accent-primary text-white flex items-center justify-center font-bold text-sm shrink-0">
                       {item.avatar}
@@ -116,9 +117,10 @@ export default function Header() {
               </div>
               <div className="flex flex-col">
                 {[
-                  { bgClass: 'bg-success-light', colorClass: 'text-success', title: 'New Appointment', desc: 'Sarah Jenkins booked for tomorrow.', time: '10m ago' },
-                  { bgClass: 'bg-warning-light', colorClass: 'text-warning', title: 'System Update', desc: 'Maintenance scheduled at midnight.', time: '2h ago' },
-                ].map((item) => (
+                   { bgClass: 'bg-success-light', colorClass: 'text-success', title: 'New Appointment Booked', desc: 'Mizanur Rahman scheduled for Pediatrics tomorrow.', time: '10m ago' },
+                   { bgClass: 'bg-warning-light', colorClass: 'text-warning', title: 'Low Stock Alert', desc: 'Amoxil 250mg stock is critically low (38 units).', time: '30m ago' },
+                   { bgClass: 'bg-accent-light', colorClass: 'text-accent-primary', title: 'Lab Result Ready', desc: 'CBC report for Fatema Akter is ready for review.', time: '1h ago' },
+                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-3 px-4 py-3 border-b border-border transition-colors hover:bg-bg-primary cursor-pointer">
                     <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${item.bgClass} ${item.colorClass}`}>
                       <BellIcon className="w-4 h-4" />
