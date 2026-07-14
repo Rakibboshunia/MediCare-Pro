@@ -69,7 +69,7 @@ export default function Header() {
           </button>
 
           {showChat && (
-            <div className="absolute right-0 top-[calc(100%+0.75rem)] w-80 bg-bg-card border border-border rounded-2xl shadow-2xl z-50 overflow-hidden animate-slide-down">
+            <div className="absolute right-0 top-[calc(100%+0.75rem)] w-80 bg-bg-secondary border border-border rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-[999] overflow-hidden">
               <div className="flex justify-between items-center px-4 py-3 border-b border-border">
                 <h3 className="font-semibold text-text-primary">Messages</h3>
                 <span className="text-xs text-accent-primary cursor-pointer hover:underline">Mark all as read</span>
@@ -110,7 +110,7 @@ export default function Header() {
           </button>
 
           {showNotifications && (
-            <div className="absolute right-0 top-[calc(100%+0.75rem)] w-80 bg-bg-card border border-border rounded-2xl shadow-2xl z-50 overflow-hidden animate-slide-down">
+            <div className="absolute right-0 top-[calc(100%+0.75rem)] w-80 bg-bg-secondary border border-border rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-[999] overflow-hidden">
               <div className="flex justify-between items-center px-4 py-3 border-b border-border">
                 <h3 className="font-semibold text-text-primary">Notifications</h3>
                 <span className="text-xs text-accent-primary cursor-pointer hover:underline">Mark all as read</span>
