@@ -73,53 +73,57 @@ export default function NursesStaff() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="flex flex-col gap-8 animate-fade-in">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 p-6 rounded-2xl border border-blue-500/20 shadow-sm">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Nurses & Staff</h1>
-          <p className="text-sm text-text-muted mt-1">Manage hospital staff, shifts, and assignments</p>
+          <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400">Nurses & Staff</h1>
+          <p className="text-sm text-text-muted mt-2 font-medium">Manage hospital staff, assignments, and contact details</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="px-5 py-2.5 bg-accent-primary text-white rounded-xl font-semibold transition-opacity hover:opacity-90 cursor-pointer flex items-center gap-2 text-sm border-none"
+          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-blue-500/30 cursor-pointer flex items-center gap-2 text-sm border-none"
         >
           <UserPlusIcon className="w-5 h-5" /> Add Staff
         </button>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-panel p-5 flex flex-col gap-1">
-          <span className="text-2xl font-bold text-text-primary">{staff.length}</span>
-          <span className="text-xs text-text-muted font-medium">Total Staff</span>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-700">{staff.length}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">Total Staff</span>
         </div>
-        <div className="glass-panel p-5 flex flex-col gap-1 border-l-4 border-success">
-          <span className="text-2xl font-bold text-success">{onDuty}</span>
-          <span className="text-xs text-text-muted font-medium">On Duty</span>
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-emerald-600">{onDuty}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">On Duty</span>
         </div>
-        <div className="glass-panel p-5 flex flex-col gap-1 border-l-4 border-warning">
-          <span className="text-2xl font-bold text-warning">{offDuty}</span>
-          <span className="text-xs text-text-muted font-medium">Off Duty</span>
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">{offDuty}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">Off Duty</span>
         </div>
-        <div className="glass-panel p-5 flex flex-col gap-1 border-l-4 border-danger">
-          <span className="text-2xl font-bold text-danger">{onLeave}</span>
-          <span className="text-xs text-text-muted font-medium">On Leave</span>
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-rose-500/10 rounded-full blur-xl group-hover:bg-rose-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-rose-600">{onLeave}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">On Leave</span>
         </div>
       </div>
 
       {/* Search & Filters */}
-      <div className="glass-panel p-5 flex flex-col gap-5 min-h-[400px]">
-        <div className="flex flex-wrap gap-3">
-          <div className="flex items-center gap-3 px-4 py-2.5 bg-bg-primary border border-border rounded-xl text-text-muted flex-1 min-w-[200px]">
-            <MagnifyingGlassIcon className="w-5 h-5" />
-            <input type="text" placeholder="Search staff by name, ID, or department..." className="flex-1 bg-transparent border-none text-text-primary outline-none text-sm"
+      <div className="glass-panel p-8 flex flex-col gap-8 min-h-[400px] border-t-4 border-t-blue-500">
+        <div className="flex flex-wrap gap-4">
+          <div className="flex items-center gap-3 px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus-within:border-blue-500/50 focus-within:ring-2 focus-within:ring-blue-500/20 rounded-xl text-text-muted flex-1 min-w-[200px] transition-all shadow-sm">
+            <MagnifyingGlassIcon className="w-5 h-5 text-blue-500" />
+            <input type="text" placeholder="Search staff by name, ID, or department..." className="flex-1 bg-transparent border-none text-text-primary outline-none placeholder:text-text-muted/70"
               value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
-          <select className="px-4 py-2.5 bg-bg-primary border border-border rounded-xl text-text-primary text-sm outline-none cursor-pointer"
+          <select className="px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 rounded-xl text-text-primary font-medium outline-none cursor-pointer shadow-sm transition-all"
             value={filterRole} onChange={(e) => setFilterRole(e.target.value)}>
             {roles.map(r => <option key={r}>{r}</option>)}
           </select>
-          <select className="px-4 py-2.5 bg-bg-primary border border-border rounded-xl text-text-primary text-sm outline-none cursor-pointer"
+          <select className="px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 rounded-xl text-text-primary font-medium outline-none cursor-pointer shadow-sm transition-all"
             value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
             <option>All</option>
             <option>On Duty</option>
@@ -129,50 +133,50 @@ export default function NursesStaff() {
         </div>
 
         {/* Staff Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredStaff.length > 0 ? (
             filteredStaff.map((member) => (
-              <div key={member.id} className="bg-bg-primary border border-border rounded-2xl p-5 flex flex-col gap-4 transition-all hover:-translate-y-1 hover:shadow-lg hover:border-accent-light cursor-pointer"
+              <div key={member.id} className="bg-bg-primary/40 backdrop-blur-sm border border-border rounded-2xl p-6 flex flex-col gap-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-blue-500/30 cursor-pointer group"
                 onClick={() => setSelectedStaff(member)}>
                 <div className="flex justify-between items-start">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <div className="relative">
-                      <img src={member.avatar} alt={member.name} className="w-12 h-12 rounded-full object-cover border-2 border-bg-secondary" />
-                      <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-bg-primary ${
-                        member.status === 'On Duty' ? 'bg-success' : member.status === 'Off Duty' ? 'bg-warning' : 'bg-danger'
+                      <img src={member.avatar} alt={member.name} className="w-14 h-14 rounded-full object-cover border-2 border-bg-secondary shadow-sm" />
+                      <span className={`absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full border-2 border-bg-primary ${
+                        member.status === 'On Duty' ? 'bg-emerald-500' : member.status === 'Off Duty' ? 'bg-amber-500' : 'bg-rose-500'
                       }`} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-sm text-text-primary">{member.name}</h3>
-                      <p className="text-xs text-text-muted">{member.role}</p>
+                      <h3 className="font-bold text-lg text-text-primary group-hover:text-blue-500 transition-colors">{member.name}</h3>
+                      <p className="text-xs font-semibold text-text-muted">{member.role}</p>
                     </div>
                   </div>
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${
-                    member.status === 'On Duty' ? 'bg-success-light text-success' :
-                    member.status === 'Off Duty' ? 'bg-warning-light text-warning' :
-                    'bg-danger-light text-danger'
+                  <span className={`text-[11px] px-3 py-1.5 rounded-full font-bold shadow-sm ${
+                    member.status === 'On Duty' ? 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20' :
+                    member.status === 'Off Duty' ? 'bg-amber-500/10 text-amber-600 border border-amber-500/20' :
+                    'bg-rose-500/10 text-rose-600 border border-rose-500/20'
                   }`}>{member.status}</span>
                 </div>
-                <div className="flex flex-col gap-2 pt-3 border-t border-border text-xs">
+                <div className="flex flex-col gap-3 pt-4 border-t border-border/50 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-text-muted">Department</span>
-                    <span className="font-medium text-text-primary">{member.department}</span>
+                    <span className="text-text-muted font-medium">Department</span>
+                    <span className="font-bold text-text-primary">{member.department}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-text-muted">Shift</span>
-                    <span className={`font-semibold ${member.shift === 'Night' ? 'text-violet-500' : member.shift === 'Rotating' ? 'text-amber-500' : 'text-cyan-500'}`}>{member.shift}</span>
+                    <span className="text-text-muted font-medium">Shift</span>
+                    <span className={`font-bold ${member.shift === 'Night' ? 'text-violet-500' : member.shift === 'Rotating' ? 'text-amber-500' : 'text-cyan-500'}`}>{member.shift}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-text-muted">ID</span>
-                    <span className="font-medium text-text-primary">{member.id}</span>
+                    <span className="text-text-muted font-medium">ID</span>
+                    <span className="font-bold text-text-primary">{member.id}</span>
                   </div>
                 </div>
-                <div className="flex gap-2 mt-auto">
-                  <a href={`tel:${member.phone}`} className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-bg-secondary border border-border rounded-lg text-xs text-text-secondary font-medium hover:bg-accent-light hover:text-accent-primary hover:border-accent-light transition-colors">
-                    <PhoneIcon className="w-3.5 h-3.5" /> Call
+                <div className="flex gap-3 mt-auto pt-2">
+                  <a href={`tel:${member.phone}`} onClick={(e) => e.stopPropagation()} className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500/5 border border-blue-500/10 rounded-xl text-xs font-bold text-blue-600 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all transform hover:scale-[1.02] shadow-sm">
+                    <PhoneIcon className="w-4 h-4" /> Call
                   </a>
-                  <a href={`mailto:${member.email}`} className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-bg-secondary border border-border rounded-lg text-xs text-text-secondary font-medium hover:bg-accent-light hover:text-accent-primary hover:border-accent-light transition-colors">
-                    <EnvelopeIcon className="w-3.5 h-3.5" /> Email
+                  <a href={`mailto:${member.email}`} onClick={(e) => e.stopPropagation()} className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-cyan-500/5 border border-cyan-500/10 rounded-xl text-xs font-bold text-cyan-600 hover:bg-cyan-500 hover:text-white hover:border-cyan-500 transition-all transform hover:scale-[1.02] shadow-sm">
+                    <EnvelopeIcon className="w-4 h-4" /> Email
                   </a>
                 </div>
               </div>

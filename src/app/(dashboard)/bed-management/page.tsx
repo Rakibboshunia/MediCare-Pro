@@ -102,89 +102,92 @@ export default function BedManagement() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div className="flex flex-col gap-8 animate-fade-in">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-teal-500/10 to-emerald-500/10 p-6 rounded-2xl border border-teal-500/20 shadow-sm">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Bed Management</h1>
-          <p className="text-sm text-text-muted mt-1">Real-time bed availability and patient allocation</p>
+          <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-emerald-600 dark:from-teal-400 dark:to-emerald-400">Bed Management</h1>
+          <p className="text-sm text-text-muted mt-2 font-medium">Real-time bed availability, patient allocation, and ward status</p>
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="px-5 py-2.5 bg-accent-primary text-white rounded-xl font-semibold transition-opacity hover:opacity-90 cursor-pointer flex items-center gap-2 text-sm border-none"
+          className="px-6 py-3 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-teal-500/30 cursor-pointer flex items-center gap-2 text-sm border-none"
         >
           <PlusIcon className="w-5 h-5" /> Add Bed
         </button>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        <div className="glass-panel p-4 flex flex-col items-center gap-1">
-          <div className="relative w-14 h-14">
-            <svg className="w-14 h-14 -rotate-90" viewBox="0 0 36 36">
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="currentColor" strokeWidth="2" className="text-border" />
-              <circle cx="18" cy="18" r="15.9" fill="none" strokeWidth="2.5" strokeLinecap="round"
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+        <div className="glass-panel p-5 flex flex-col items-center justify-center gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="relative w-16 h-16">
+            <svg className="w-16 h-16 -rotate-90 drop-shadow-sm" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="currentColor" strokeWidth="3" className="text-border" />
+              <circle cx="18" cy="18" r="15.9" fill="none" strokeWidth="3" strokeLinecap="round"
                 strokeDasharray={`${occupancyRate} ${100 - occupancyRate}`}
-                className={occupancyRate > 85 ? 'text-rose-500' : occupancyRate > 60 ? 'text-amber-500' : 'text-emerald-500'} />
+                className={`transition-all duration-1000 ease-out ${occupancyRate > 85 ? 'text-rose-500' : occupancyRate > 60 ? 'text-amber-500' : 'text-emerald-500'}`} />
             </svg>
-            <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-text-primary">{occupancyRate}%</span>
+            <span className="absolute inset-0 flex items-center justify-center text-sm font-black text-text-primary">{occupancyRate}%</span>
           </div>
-          <span className="text-xs text-text-muted font-medium">Occupancy</span>
+          <span className="text-xs text-text-secondary font-bold uppercase tracking-wider">Occupancy</span>
         </div>
         {[
-          { label: 'Total Beds', value: totalBeds, color: 'text-indigo-500', bg: 'bg-indigo-500/10' },
-          { label: 'Available', value: available, color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
-          { label: 'Occupied', value: occupied, color: 'text-rose-500', bg: 'bg-rose-500/10' },
-          { label: 'Maintenance', value: maintenance + reserved, color: 'text-amber-500', bg: 'bg-amber-500/10' },
+          { label: 'Total Beds', value: totalBeds, color: 'from-indigo-500 to-indigo-700', bg: 'bg-indigo-500/10' },
+          { label: 'Available', value: available, color: 'from-emerald-400 to-emerald-600', bg: 'bg-emerald-500/10' },
+          { label: 'Occupied', value: occupied, color: 'from-rose-400 to-rose-600', bg: 'bg-rose-500/10' },
+          { label: 'Maintenance', value: maintenance + reserved, color: 'from-amber-400 to-amber-600', bg: 'bg-amber-500/10' },
         ].map((stat) => (
-          <div key={stat.label} className="glass-panel p-4 flex flex-col items-center gap-1">
-            <span className={`text-2xl font-bold ${stat.color}`}>{stat.value}</span>
-            <span className="text-xs text-text-muted font-medium">{stat.label}</span>
+          <div key={stat.label} className="glass-panel p-5 flex flex-col items-center justify-center gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+            <div className={`absolute -right-4 -top-4 w-20 h-20 ${stat.bg} rounded-full blur-xl group-hover:opacity-75 transition-opacity`}></div>
+            <span className={`text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r ${stat.color}`}>{stat.value}</span>
+            <span className="text-xs text-text-secondary font-bold uppercase tracking-wider">{stat.label}</span>
           </div>
         ))}
       </div>
 
       {/* Filters */}
-      <div className="glass-panel p-5 flex flex-col gap-4">
-        <div className="flex flex-wrap gap-3">
-          <div className="flex items-center gap-3 px-4 py-2.5 bg-bg-primary border border-border rounded-xl text-text-muted flex-1 min-w-[200px]">
-            <MagnifyingGlassIcon className="w-5 h-5" />
-            <input type="text" placeholder="Search bed ID or patient..." className="flex-1 bg-transparent border-none text-text-primary outline-none text-sm"
+      <div className="glass-panel p-6 flex flex-col gap-6 border-t-4 border-t-teal-500">
+        <div className="flex flex-wrap gap-4">
+          <div className="flex items-center gap-3 px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus-within:border-teal-500/50 focus-within:ring-2 focus-within:ring-teal-500/20 rounded-xl text-text-muted flex-1 min-w-[200px] transition-all shadow-sm">
+            <MagnifyingGlassIcon className="w-5 h-5 text-teal-500" />
+            <input type="text" placeholder="Search bed ID or patient..." className="flex-1 bg-transparent border-none text-text-primary outline-none placeholder:text-text-muted/70"
               value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
-          <select className="px-4 py-2.5 bg-bg-primary border border-border rounded-xl text-text-primary text-sm outline-none cursor-pointer"
+          <select className="px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 rounded-xl text-text-primary font-medium outline-none cursor-pointer shadow-sm transition-all"
             value={filterWard} onChange={(e) => setFilterWard(e.target.value)}>
             {wards.map(w => <option key={w}>{w}</option>)}
           </select>
-          <select className="px-4 py-2.5 bg-bg-primary border border-border rounded-xl text-text-primary text-sm outline-none cursor-pointer"
+          <select className="px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 rounded-xl text-text-primary font-medium outline-none cursor-pointer shadow-sm transition-all"
             value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
             {statuses.map(s => <option key={s}>{s}</option>)}
           </select>
-          <div className="flex items-center bg-bg-primary border border-border rounded-xl overflow-hidden">
-            <button onClick={() => setViewMode('grid')} className={`px-3 py-2.5 text-sm font-medium transition-colors cursor-pointer border-none ${viewMode === 'grid' ? 'bg-accent-primary text-white' : 'bg-transparent text-text-muted hover:text-text-primary'}`}>Grid</button>
-            <button onClick={() => setViewMode('table')} className={`px-3 py-2.5 text-sm font-medium transition-colors cursor-pointer border-none ${viewMode === 'table' ? 'bg-accent-primary text-white' : 'bg-transparent text-text-muted hover:text-text-primary'}`}>Table</button>
+          <div className="flex items-center bg-bg-primary/50 backdrop-blur-md border border-border rounded-xl p-1 shadow-sm">
+            <button onClick={() => setViewMode('grid')} className={`px-4 py-2 text-sm font-bold rounded-lg transition-all cursor-pointer border-none ${viewMode === 'grid' ? 'bg-teal-500 text-white shadow-md' : 'bg-transparent text-text-muted hover:text-text-primary'}`}>Grid</button>
+            <button onClick={() => setViewMode('table')} className={`px-4 py-2 text-sm font-bold rounded-lg transition-all cursor-pointer border-none ${viewMode === 'table' ? 'bg-teal-500 text-white shadow-md' : 'bg-transparent text-text-muted hover:text-text-primary'}`}>Table</button>
           </div>
         </div>
 
         {viewMode === 'grid' ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {filteredBeds.map((bed) => (
-              <div key={bed.id} className={`p-3 rounded-xl border-2 transition-all hover:shadow-md cursor-pointer group ${getStatusColor(bed.status)}`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-bold opacity-80">{bed.id}</span>
-                  {getStatusIcon(bed.status)}
+              <div key={bed.id} className={`p-4 rounded-2xl border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer group bg-bg-primary/40 backdrop-blur-sm ${getStatusColor(bed.status)}`}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[11px] font-extrabold tracking-wide opacity-90">{bed.id}</span>
+                  <div className="p-1 rounded-full bg-current/10">
+                    {getStatusIcon(bed.status)}
+                  </div>
                 </div>
-                <div className="text-[10px] font-medium opacity-70 mb-1">{bed.type}</div>
-                <div className="text-xs font-semibold">{bed.ward}</div>
+                <div className="text-[11px] font-bold opacity-75 mb-1 tracking-wider uppercase">{bed.type}</div>
+                <div className="text-sm font-bold">{bed.ward}</div>
                 {bed.patient && (
-                  <div className="mt-2 pt-2 border-t border-current/20">
-                    <p className="text-[10px] font-semibold truncate">{bed.patient}</p>
-                    <p className="text-[9px] opacity-60 mt-0.5">{bed.doctor}</p>
+                  <div className="mt-3 pt-3 border-t border-current/20 flex flex-col gap-1">
+                    <p className="text-xs font-bold truncate">{bed.patient}</p>
+                    <p className="text-[10px] opacity-80 font-medium">{bed.doctor}</p>
                   </div>
                 )}
                 {bed.status === 'Occupied' && (
                   <button 
                     onClick={(e) => { e.stopPropagation(); handleDischarge(bed.id); }}
-                    className="mt-2 w-full py-1 text-[10px] font-bold rounded-md bg-white/20 hover:bg-white/40 transition-colors cursor-pointer border-none opacity-0 group-hover:opacity-100"
+                    className="mt-3 w-full py-1.5 text-[11px] font-black uppercase tracking-wider rounded-lg bg-rose-500 text-white shadow-md hover:bg-rose-600 transition-all transform hover:scale-[1.02] cursor-pointer border-none opacity-0 group-hover:opacity-100 absolute bottom-3 left-0 right-0 w-[calc(100%-1.5rem)] mx-auto"
                   >
                     Discharge
                   </button>

@@ -102,61 +102,65 @@ export default function Emergency() {
   };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-8 animate-fade-in">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-danger-light rounded-xl">
-            <ExclamationTriangleIcon className="w-7 h-7 text-danger" />
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-gradient-to-r from-red-500/10 to-orange-500/10 p-6 rounded-2xl border border-red-500/20 shadow-sm">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-gradient-to-br from-red-500 to-rose-600 rounded-xl shadow-lg shadow-red-500/30">
+            <ExclamationTriangleIcon className="w-8 h-8 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Emergency Department</h1>
-            <p className="text-sm text-text-muted mt-0.5">Active emergency cases and triage management</p>
+            <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-red-600 to-orange-600 dark:from-red-400 dark:to-orange-400">Emergency Department</h1>
+            <p className="text-sm text-text-muted mt-2 font-medium">Active emergency cases, triage management, and live vitals</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <a href="tel:999" className="px-4 py-2.5 bg-danger text-white rounded-xl font-semibold transition-opacity hover:opacity-90 flex items-center gap-2 text-sm border-none">
-            <PhoneIcon className="w-4 h-4" /> Emergency: 999
+          <a href="tel:999" className="px-5 py-3 bg-red-500 hover:bg-red-600 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-md flex items-center gap-2 text-sm border-none">
+            <PhoneIcon className="w-5 h-5 animate-pulse" /> Emergency: 999
           </a>
-          <button onClick={() => setIsModalOpen(true)} className="px-5 py-2.5 bg-accent-primary text-white rounded-xl font-semibold transition-opacity hover:opacity-90 cursor-pointer flex items-center gap-2 text-sm border-none">
+          <button onClick={() => setIsModalOpen(true)} className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-md shadow-orange-500/30 cursor-pointer flex items-center gap-2 text-sm border-none">
             <PlusIcon className="w-5 h-5" /> New Case
           </button>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-panel p-5 border-l-4 border-red-500 flex flex-col gap-1">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-red-500/10 rounded-full blur-xl group-hover:bg-red-500/20 transition-colors"></div>
           <div className="flex items-center justify-between">
-            <span className="text-2xl font-bold text-red-500">{critical}</span>
-            <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+            <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-700">{critical}</span>
+            <div className="w-4 h-4 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
           </div>
-          <span className="text-xs text-text-muted font-medium">Critical Cases</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">Critical Cases</span>
         </div>
-        <div className="glass-panel p-5 border-l-4 border-orange-500 flex flex-col gap-1">
-          <span className="text-2xl font-bold text-orange-500">{urgent}</span>
-          <span className="text-xs text-text-muted font-medium">Urgent Cases</span>
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/10 rounded-full blur-xl group-hover:bg-orange-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">{urgent}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">Urgent Cases</span>
         </div>
-        <div className="glass-panel p-5 border-l-4 border-amber-500 flex flex-col gap-1">
-          <span className="text-2xl font-bold text-amber-500">{waiting}</span>
-          <span className="text-xs text-text-muted font-medium">Waiting</span>
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600">{waiting}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">Waiting</span>
         </div>
-        <div className="glass-panel p-5 border-l-4 border-indigo-500 flex flex-col gap-1">
-          <span className="text-2xl font-bold text-indigo-500">{underTreatment}</span>
-          <span className="text-xs text-text-muted font-medium">Under Treatment</span>
+        <div className="glass-panel p-6 flex flex-col gap-2 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-indigo-500/10 rounded-full blur-xl group-hover:bg-indigo-500/20 transition-colors"></div>
+          <span className="text-4xl font-black bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-indigo-700">{underTreatment}</span>
+          <span className="text-sm text-text-secondary font-semibold uppercase tracking-wider">Under Treatment</span>
         </div>
       </div>
 
       {/* Severity Filter */}
-      <div className="flex items-center gap-2 flex-wrap">
+      <div className="flex items-center gap-3 flex-wrap bg-bg-primary/50 backdrop-blur-md p-2 rounded-2xl border border-border inline-flex">
         {['All', 'Critical', 'Urgent', 'Moderate', 'Minor'].map((sev) => (
           <button 
             key={sev}
             onClick={() => setFilterSeverity(sev)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer border ${
+            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer border ${
               filterSeverity === sev 
-                ? 'bg-accent-primary text-white border-accent-primary' 
-                : 'bg-bg-secondary text-text-secondary border-border hover:border-text-muted'
+                ? 'bg-red-500 text-white border-red-500 shadow-md transform scale-[1.02]' 
+                : 'bg-transparent text-text-secondary border-transparent hover:bg-bg-secondary'
             }`}
           >
             {sev === 'Critical' && '🔴 '}{sev === 'Urgent' && '🟠 '}{sev === 'Moderate' && '🟡 '}{sev === 'Minor' && '🟢 '}{sev}
@@ -165,35 +169,35 @@ export default function Emergency() {
       </div>
 
       {/* Cases */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-5">
         {filteredCases.map((eCase) => (
-          <div key={eCase.id} className={`glass-panel p-5 border-l-4 transition-all hover:shadow-md ${
-            eCase.severity === 'Critical' ? 'border-red-500' :
-            eCase.severity === 'Urgent' ? 'border-orange-500' :
-            eCase.severity === 'Moderate' ? 'border-amber-500' : 'border-emerald-500'
-          } ${eCase.status === 'Discharged' ? 'opacity-60' : ''}`}>
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div key={eCase.id} className={`bg-bg-primary/40 backdrop-blur-sm p-6 border border-border rounded-2xl transition-all duration-300 hover:shadow-xl group ${
+            eCase.severity === 'Critical' ? 'hover:border-red-500/50' :
+            eCase.severity === 'Urgent' ? 'hover:border-orange-500/50' :
+            eCase.severity === 'Moderate' ? 'hover:border-amber-500/50' : 'hover:border-emerald-500/50'
+          } ${eCase.status === 'Discharged' ? 'opacity-60 grayscale' : ''}`}>
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               {/* Patient Info */}
-              <div className="flex items-start gap-4 flex-1">
-                <div className={`p-2 rounded-xl shrink-0 ${getSeverityColor(eCase.severity)}`}>
-                  <HeartIcon className="w-6 h-6" />
+              <div className="flex items-start gap-5 flex-1">
+                <div className={`p-4 rounded-2xl shrink-0 transition-transform group-hover:scale-110 ${getSeverityColor(eCase.severity)}`}>
+                  <HeartIcon className="w-7 h-7" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-bold text-text-primary text-base">{eCase.patient}</h3>
-                    <span className="text-xs text-text-muted">{eCase.age} yrs, {eCase.gender}</span>
-                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${getSeverityColor(eCase.severity)}`}>
+                  <div className="flex items-center gap-3 flex-wrap mb-1">
+                    <h3 className="font-extrabold text-text-primary text-lg">{eCase.patient}</h3>
+                    <span className="text-sm font-semibold text-text-muted">{eCase.age} yrs, {eCase.gender}</span>
+                    <span className={`text-xs px-3 py-1 rounded-full font-bold shadow-sm border ${getSeverityColor(eCase.severity)}`}>
                       {eCase.severity}
                     </span>
                   </div>
-                  <p className="text-sm text-text-secondary mt-1 font-medium">{eCase.condition}</p>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-text-muted flex-wrap">
-                    <span className="flex items-center gap-1"><TruckIcon className="w-3.5 h-3.5" /> {eCase.arrivalMode}</span>
-                    <span className="flex items-center gap-1"><ClockIcon className="w-3.5 h-3.5" /> {eCase.arrivalTime}</span>
-                    <span>Dr: <span className="text-text-primary font-medium">{eCase.assignedDoctor}</span></span>
+                  <p className="text-base text-text-secondary font-bold mb-3">{eCase.condition}</p>
+                  <div className="flex items-center gap-5 text-sm text-text-muted flex-wrap">
+                    <span className="flex items-center gap-1.5 font-medium"><TruckIcon className="w-4 h-4 text-indigo-500" /> {eCase.arrivalMode}</span>
+                    <span className="flex items-center gap-1.5 font-medium"><ClockIcon className="w-4 h-4 text-emerald-500" /> {eCase.arrivalTime}</span>
+                    <span className="font-medium">Dr: <span className="text-text-primary">{eCase.assignedDoctor}</span></span>
                     {elapsedTimes[eCase.id] && (
-                      <span className="flex items-center gap-1 text-amber-500 font-semibold">
-                        <ClockIcon className="w-3.5 h-3.5" /> Elapsed: {elapsedTimes[eCase.id]}
+                      <span className="flex items-center gap-1.5 text-amber-500 font-bold bg-amber-500/10 px-2 py-0.5 rounded-md">
+                        <ClockIcon className="w-4 h-4" /> Elapsed: {elapsedTimes[eCase.id]}
                       </span>
                     )}
                   </div>
@@ -201,36 +205,36 @@ export default function Emergency() {
               </div>
 
               {/* Vitals */}
-              <div className="flex items-center gap-3 flex-wrap">
+              <div className="flex items-center gap-4 flex-wrap bg-bg-secondary p-3 rounded-xl border border-border">
                 {[
                   { label: 'BP', value: eCase.vitals.bp, alert: parseInt(eCase.vitals.bp) > 140 },
                   { label: 'Pulse', value: `${eCase.vitals.pulse}`, alert: eCase.vitals.pulse > 100 },
                   { label: 'SpO2', value: `${eCase.vitals.spo2}%`, alert: eCase.vitals.spo2 < 94 },
                   { label: 'Temp', value: eCase.vitals.temp, alert: parseFloat(eCase.vitals.temp) > 100 },
                 ].map((vital) => (
-                  <div key={vital.label} className={`px-3 py-1.5 rounded-lg text-center border ${vital.alert ? 'bg-danger-light border-danger/30' : 'bg-bg-primary border-border'}`}>
-                    <p className="text-[10px] text-text-muted font-medium">{vital.label}</p>
-                    <p className={`text-sm font-bold ${vital.alert ? 'text-danger' : 'text-text-primary'}`}>{vital.value}</p>
+                  <div key={vital.label} className={`px-4 py-2 rounded-lg text-center ${vital.alert ? 'bg-danger-light border border-danger/30 shadow-sm' : ''}`}>
+                    <p className="text-[11px] text-text-muted font-bold uppercase tracking-wider">{vital.label}</p>
+                    <p className={`text-base font-black ${vital.alert ? 'text-danger animate-pulse' : 'text-text-primary'}`}>{vital.value}</p>
                   </div>
                 ))}
               </div>
 
               {/* Actions */}
-              <div className="flex items-center gap-2 shrink-0">
-                <span className={`text-[10px] px-3 py-1 rounded-full font-bold ${
-                  eCase.status === 'Under Treatment' ? 'bg-accent-light text-accent-primary' :
-                  eCase.status === 'Waiting' ? 'bg-warning-light text-warning' :
-                  eCase.status === 'Admitted' ? 'bg-success-light text-success' :
-                  eCase.status === 'Triaged' ? 'bg-cyan-500/15 text-cyan-500' :
-                  'bg-bg-secondary text-text-muted'
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+                <span className={`text-[11px] px-4 py-2 rounded-full font-black uppercase tracking-wider shadow-sm border ${
+                  eCase.status === 'Under Treatment' ? 'bg-indigo-500/10 text-indigo-600 border-indigo-500/20' :
+                  eCase.status === 'Waiting' ? 'bg-amber-500/10 text-amber-600 border-amber-500/20' :
+                  eCase.status === 'Admitted' ? 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20' :
+                  eCase.status === 'Triaged' ? 'bg-cyan-500/10 text-cyan-600 border-cyan-500/20' :
+                  'bg-bg-secondary text-text-muted border-border'
                 }`}>{eCase.status}</span>
                 {eCase.status !== 'Discharged' && eCase.status !== 'Admitted' && (
-                  <button onClick={() => handleAdmit(eCase.id)} className="px-3 py-1.5 rounded-lg bg-success-light text-success text-xs font-semibold cursor-pointer border-none hover:bg-success hover:text-white transition-colors">
+                  <button onClick={() => handleAdmit(eCase.id)} className="w-full sm:w-auto px-4 py-2 rounded-xl bg-emerald-500 text-white text-xs font-bold cursor-pointer border-none hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-500/30 transition-all transform hover:scale-[1.02]">
                     Admit
                   </button>
                 )}
                 {eCase.status !== 'Discharged' && (
-                  <button onClick={() => handleDischarge(eCase.id)} className="px-3 py-1.5 rounded-lg bg-bg-secondary text-text-muted text-xs font-semibold cursor-pointer border border-border hover:bg-danger-light hover:text-danger hover:border-danger/30 transition-colors">
+                  <button onClick={() => handleDischarge(eCase.id)} className="w-full sm:w-auto px-4 py-2 rounded-xl bg-bg-secondary text-text-muted text-xs font-bold cursor-pointer border border-border hover:bg-rose-500 hover:text-white hover:border-rose-500 hover:shadow-lg hover:shadow-rose-500/30 transition-all transform hover:scale-[1.02]">
                     Discharge
                   </button>
                 )}
