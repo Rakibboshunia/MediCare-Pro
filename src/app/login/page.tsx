@@ -42,10 +42,8 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 p-4">
       <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
-        <div className="flex flex-col items-center mb-8 gap-3">
-          <div className="w-14 h-14 bg-gradient-to-br from-purple-500 to-violet-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-            M
-          </div>
+        <div className="flex flex-col items-center mb-8">
+          <img src="/logo.png" alt="MediCare Pro Logo" className="w-16 h-16 object-contain rounded-2xl shadow-lg bg-white mb-4" />
           <h1 className="text-2xl font-bold text-white">MediCare Pro</h1>
           <p className="text-white/50 text-sm">Welcome back to your workspace</p>
         </div>
