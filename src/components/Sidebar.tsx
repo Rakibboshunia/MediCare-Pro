@@ -15,9 +15,15 @@ import {
   BeakerIcon,
   ChatBubbleLeftRightIcon,
   ClipboardDocumentCheckIcon,
-  SparklesIcon
+  SparklesIcon,
+  UserGroupIcon,
+  TruckIcon,
+  ExclamationTriangleIcon,
+  HeartIcon,
+  RectangleStackIcon
 } from '@heroicons/react/24/outline';
 
+<<<<<<< HEAD
 const modules = [
   {
     id: 'overview',
@@ -67,6 +73,25 @@ const modules = [
       { name: 'Settings', href: '/settings' },
     ]
   }
+=======
+const navigation = [
+  { name: 'Dashboard', href: '/', icon: HomeIcon },
+  { name: 'Doctors', href: '/doctors', icon: UserCircleIcon },
+  { name: 'Nurses & Staff', href: '/nurses-staff', icon: UserGroupIcon },
+  { name: 'Patients', href: '/patients', icon: UsersIcon },
+  { name: 'Appointments', href: '/appointments', icon: CalendarIcon },
+  { name: 'Emergency', href: '/emergency', icon: ExclamationTriangleIcon },
+  { name: 'Bed Management', href: '/bed-management', icon: RectangleStackIcon },
+  { name: 'Blood Bank', href: '/blood-bank', icon: HeartIcon },
+  { name: 'Ambulance', href: '/ambulance', icon: TruckIcon },
+  { name: 'Prescriptions', href: '/prescriptions', icon: DocumentTextIcon },
+  { name: 'Laboratory', href: '/laboratory', icon: ClipboardDocumentCheckIcon },
+  { name: 'Pharmacy', href: '/pharmacy', icon: BeakerIcon },
+  { name: 'Billing', href: '/billing', icon: CreditCardIcon },
+  { name: 'AI Assistant', href: '/ai-assistant', icon: SparklesIcon },
+  { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
+  { name: 'Settings', href: '/settings', icon: Cog6ToothIcon },
+>>>>>>> 603133e215692601366c1d203176efa84d30d4ad
 ];
 
 import { useMobileNav } from '@/components/MobileNavProvider';
