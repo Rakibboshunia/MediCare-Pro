@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, UserPlusIcon, EllipsisVerticalIcon, PhoneIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -69,6 +70,7 @@ export default function NursesStaff() {
       avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=NRS${staff.length + 1}`,
     };
     setStaff([newStaff, ...staff]);
+    toast.success('Staff member added successfully!');
     setIsModalOpen(false);
   };
 

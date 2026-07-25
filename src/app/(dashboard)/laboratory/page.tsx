@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { MagnifyingGlassIcon, PlusIcon, DocumentArrowDownIcon, CheckCircleIcon, ClockIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
+import toast from 'react-hot-toast';
 
 const initialTests = [
   { id: 'LAB-2501', patient: 'Fatema Akter', testName: 'Complete Blood Count (CBC)', doctor: 'Dr. Rashida Khanam', date: '2025-07-10', status: 'Completed' },
@@ -44,6 +45,7 @@ export default function Laboratory() {
     };
     
     setTests([newTest, ...tests]);
+    toast.success('Lab test request added successfully!');
     setIsModalOpen(false);
   };
 
@@ -51,7 +53,7 @@ export default function Laboratory() {
     setDownloading(id);
     setTimeout(() => {
       setDownloading(null);
-      alert('Report downloaded successfully!');
+      toast.success('Report downloaded successfully!');
     }, 1000);
   };
 

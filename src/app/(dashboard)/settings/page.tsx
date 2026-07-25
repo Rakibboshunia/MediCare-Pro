@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { ChevronDownIcon, BuildingOfficeIcon, Cog6ToothIcon, ShieldCheckIcon, BellAlertIcon } from '@heroicons/react/24/outline';
 
 export default function Settings() {
@@ -19,6 +20,7 @@ export default function Settings() {
     setTimeout(() => {
       setSavingSection(null);
       setSavedSection(section);
+      toast.success('Settings saved successfully!');
       setTimeout(() => setSavedSection(null), 3000);
     }, 1000);
   };

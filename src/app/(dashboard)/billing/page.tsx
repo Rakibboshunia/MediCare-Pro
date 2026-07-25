@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { MagnifyingGlassIcon, DocumentTextIcon, BanknotesIcon, ArrowDownTrayIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 const initialInvoices = [
   { id: 'INV-2025-001', patient: 'Fatema Akter', date: '2025-07-10', amount: '৳ 2,500', status: 'Paid' },
@@ -28,7 +29,7 @@ export default function Billing() {
     setIsExporting(true);
     setTimeout(() => {
       setIsExporting(false);
-      alert('Billing report exported successfully!');
+      toast.success('Billing report exported successfully!');
     }, 1500);
   };
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, EllipsisVerticalIcon, CalendarIcon, ClockIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -42,6 +43,7 @@ export default function Appointments() {
     };
     
     setAppointments([newApt, ...appointments]);
+    toast.success('Appointment scheduled successfully!');
     setIsModalOpen(false);
   };
 

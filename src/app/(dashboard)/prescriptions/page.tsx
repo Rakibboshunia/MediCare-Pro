@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, DocumentTextIcon, PrinterIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -29,18 +30,19 @@ export default function Prescriptions() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const newId = `RX-70${prescriptions.length + 1}`;
-    
+
     const newRx = {
       id: newId,
       patient: formData.get('patient') as string,
       doctor: formData.get('doctor') as string,
       date: new Date().toISOString().split('T')[0],
       medications: parseInt(formData.get('medications') as string),
-      status: 'Active'
+      status: 'Active',
     };
-    
+
     setPrescriptions([newRx, ...prescriptions]);
     setIsModalOpen(false);
+    toast.success('Prescription created successfully!');
   };
 
   return (
@@ -49,19 +51,19 @@ export default function Prescriptions() {
         <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Prescriptions</h1>
         <button className="px-5 py-2.5 bg-accent-primary text-white rounded-xl font-semibold transition-opacity hover:opacity-90 border-none cursor-pointer text-sm sm:text-base whitespace-nowrap" onClick={() => setIsModalOpen(true)}>+ Create Prescription</button>
       </div>
-      
+
       <div className="glass-panel p-6 flex flex-col gap-6 min-h-[400px]">
         <div className="flex items-center gap-3 px-4 py-3 bg-bg-primary border border-border rounded-xl text-text-muted">
           <MagnifyingGlassIcon className="w-5 h-5" />
-          <input 
-            type="text" 
-            placeholder="Search prescriptions by patient or ID..." 
+          <input
+            type="text"
+            placeholder="Search prescriptions by patient or ID..."
             className="flex-1 bg-transparent border-none text-text-primary outline-none"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        
+
         <div className="overflow-x-auto mt-4">
           <table className="w-full border-collapse text-left">
             <thead>

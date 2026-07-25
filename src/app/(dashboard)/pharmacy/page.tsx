@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, PlusIcon, BeakerIcon, ExclamationTriangleIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -33,7 +34,7 @@ export default function Pharmacy() {
   const handleAddMedicine = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    
+
     const stock = Number(formData.get('stock'));
     let status = 'In Stock';
     if (stock === 0) status = 'Out of Stock';
@@ -48,20 +49,22 @@ export default function Pharmacy() {
       status,
       expiry: formData.get('expiry') as string,
     };
-    
+
     setInventory([newItem, ...inventory]);
     setIsModalOpen(false);
+    toast.success('Medicine added successfully!');
   };
 
   const handleDelete = (id: string) => {
     setInventory(inventory.filter(item => item.id !== id));
+    toast.success('Medicine removed successfully!');
   };
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Pharmacy & Inventory</h1>
-        <button 
+        <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Pharmacy &amp; Inventory</h1>
+        <button
           onClick={() => setIsModalOpen(true)}
           className="px-5 py-2.5 bg-accent-primary text-white rounded-xl font-semibold transition-opacity hover:opacity-90 cursor-pointer flex items-center gap-2 text-sm sm:text-base whitespace-nowrap"
         >
@@ -98,19 +101,19 @@ export default function Pharmacy() {
           </div>
         </div>
       </div>
-      
+
       <div className="glass-panel p-6 flex flex-col gap-6 min-h-[400px]">
         <div className="flex items-center gap-3 px-4 py-3 bg-bg-primary border border-border rounded-xl text-text-muted">
           <MagnifyingGlassIcon className="w-5 h-5" />
-          <input 
-            type="text" 
-            placeholder="Search medicine by name, ID, or category..." 
+          <input
+            type="text"
+            placeholder="Search medicine by name, ID, or category..."
             className="flex-1 bg-transparent border-none text-text-primary outline-none"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        
+
         <div className="overflow-x-auto mt-4">
           <table className="w-full border-collapse text-left">
             <thead>
@@ -137,15 +140,15 @@ export default function Pharmacy() {
                     <td className="p-4 border-b border-border text-text-secondary align-middle">{item.expiry}</td>
                     <td className="p-4 border-b border-border align-middle">
                       <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        item.status === 'In Stock' ? 'bg-success-light text-success' : 
-                        item.status === 'Low Stock' ? 'bg-warning-light text-warning' : 
+                        item.status === 'In Stock' ? 'bg-success-light text-success' :
+                        item.status === 'Low Stock' ? 'bg-warning-light text-warning' :
                         'bg-danger-light text-danger'
                       }`}>
                         {item.status}
                       </span>
                     </td>
                     <td className="p-4 border-b border-border align-middle">
-                      <button 
+                      <button
                         onClick={() => handleDelete(item.id)}
                         className="p-1 text-text-muted hover:text-danger hover:bg-danger-light rounded-md transition-colors"
                         title="Delete Medicine"

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -43,6 +44,7 @@ export default function Patients() {
     };
     
     setPatients([newPatient, ...patients]);
+    toast.success('Patient added successfully!');
     setIsModalOpen(false);
   };
 

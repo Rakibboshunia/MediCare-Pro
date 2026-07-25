@@ -6,6 +6,7 @@ import {
   CurrencyDollarIcon, HeartIcon, CalendarIcon, ClockIcon,
   ArrowTrendingDownIcon, UserGroupIcon
 } from '@heroicons/react/24/outline';
+import toast from 'react-hot-toast';
 
 // Mini Bar Chart Component
 function BarChart({ data, labels, color }: { data: number[]; labels: string[]; color: string }) {
@@ -118,7 +119,7 @@ export default function Analytics() {
     setIsExporting(true);
     setTimeout(() => {
       setIsExporting(false);
-      alert('Analytics report exported successfully!');
+      toast.success('Analytics report exported successfully!');
     }, 1500);
   };
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { 
@@ -114,6 +115,7 @@ export default function Dashboard() {
     setAppointments(appointments.map(apt => 
       apt.id === id ? { ...apt, status: 'Completed' } : apt
     ));
+    toast.success('Appointment marked as completed!');
   };
 
   const patientsCount = useAnimatedCounter(1248);

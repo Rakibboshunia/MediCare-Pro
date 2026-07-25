@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, PlusIcon, CheckCircleIcon, ExclamationTriangleIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -79,6 +80,7 @@ export default function BedManagement() {
       status: 'Available',
     };
     setBeds([...beds, newBed]);
+    toast.success('Bed added successfully!');
     setIsModalOpen(false);
   };
 

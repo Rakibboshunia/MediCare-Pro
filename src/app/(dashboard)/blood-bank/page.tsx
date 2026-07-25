@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, PlusIcon, ExclamationTriangleIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -67,6 +68,7 @@ export default function BloodBank() {
       return b;
     }));
     setIsModalOpen(false);
+    toast.success('Blood donation recorded successfully!');
   };
 
   const handleFulfillRequest = (reqId: string) => {

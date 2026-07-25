@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { MagnifyingGlassIcon, PlusIcon, TruckIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
@@ -52,6 +53,7 @@ export default function Ambulance() {
       currentLocation: 'Hospital Parking',
     };
     setAmbulances([newAmb, ...ambulances]);
+    toast.success('Ambulance added successfully!');
     setIsModalOpen(false);
   };
 

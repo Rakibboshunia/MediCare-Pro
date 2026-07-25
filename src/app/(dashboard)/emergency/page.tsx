@@ -88,6 +88,7 @@ export default function Emergency() {
       arrivalMode: formData.get('arrivalMode') as EmergencyCase['arrivalMode'],
     };
     setCases([newCase, ...cases]);
+    toast.success('Emergency case registered!');
     setIsModalOpen(false);
   };
 
