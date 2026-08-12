@@ -102,6 +102,7 @@ export default function Emergency() {
     }
   };
 
+  
   return (
     <div className="flex flex-col gap-8 animate-fade-in">
       {/* Header */}
@@ -251,11 +252,13 @@ export default function Emergency() {
             <label>Patient Name</label>
             <input type="text" name="patient" required placeholder="e.g. Anwar Hossain" />
           </div>
+          
           <div className="grid grid-cols-2 gap-4">
             <div className={formStyles.formGroup}>
               <label>Age</label>
               <input type="number" name="age" required min="0" placeholder="45" />
             </div>
+            
             <div className={formStyles.formGroup}>
               <label>Gender</label>
               <select name="gender" required>
@@ -265,10 +268,12 @@ export default function Emergency() {
               </select>
             </div>
           </div>
+          
           <div className={formStyles.formGroup}>
             <label>Condition / Chief Complaint</label>
             <textarea name="condition" required placeholder="Describe the emergency condition..." rows={2}></textarea>
           </div>
+          
           <div className="grid grid-cols-2 gap-4">
             <div className={formStyles.formGroup}>
               <label>Severity</label>
@@ -279,6 +284,7 @@ export default function Emergency() {
                 <option value="Minor">🟢 Minor</option>
               </select>
             </div>
+            
             <div className={formStyles.formGroup}>
               <label>Arrival Mode</label>
               <select name="arrivalMode" required>
@@ -288,6 +294,7 @@ export default function Emergency() {
               </select>
             </div>
           </div>
+          
           <div className={formStyles.formGroup}>
             <label>Assign Doctor</label>
             <select name="doctor" required>
@@ -299,6 +306,7 @@ export default function Emergency() {
               <option value="Dr. Mahbubur Rahman">Dr. Mahbubur Rahman</option>
             </select>
           </div>
+          
           <div className={formStyles.formActions}>
             <button type="button" className={formStyles.cancelBtn} onClick={() => setIsModalOpen(false)}>Cancel</button>
             <button type="submit" className={formStyles.submitBtn}>Register Case</button>
