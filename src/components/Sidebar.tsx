@@ -21,7 +21,8 @@ import {
   TruckIcon,
   ExclamationTriangleIcon,
   HeartIcon,
-  RectangleStackIcon
+  RectangleStackIcon,
+  BriefcaseIcon
 } from '@heroicons/react/24/outline';
 
 const modules = [
@@ -41,7 +42,9 @@ const modules = [
     subItems: [
       { name: 'Patients', href: '/patients' },
       { name: 'Doctors', href: '/doctors' },
+      { name: 'Nurses & Staff', href: '/nurses-staff' },
       { name: 'Appointments', href: '/appointments' },
+      { name: 'Telemedicine', href: '/telemedicine' },
     ]
   },
   {
@@ -52,6 +55,19 @@ const modules = [
       { name: 'Prescriptions', href: '/prescriptions' },
       { name: 'Laboratory', href: '/laboratory' },
       { name: 'Pharmacy', href: '/pharmacy' },
+      { name: 'Blood Bank', href: '/blood-bank' },
+    ]
+  },
+  {
+    id: 'operations',
+    name: 'Hospital Operations',
+    icon: HeartIcon,
+    subItems: [
+      { name: 'Emergency', href: '/emergency' },
+      { name: 'Ambulance', href: '/ambulance' },
+      { name: 'Bed Management', href: '/bed-management' },
+      { name: 'OT Management', href: '/ot-management' },
+      { name: 'Dietary & Nutrition', href: '/dietary' },
     ]
   },
   {
@@ -62,6 +78,17 @@ const modules = [
       { name: 'Billing', href: '/billing' },
       { name: 'Invoices', href: '/invoices' },
       { name: 'Payouts', href: '/payouts' },
+      { name: 'Insurance Claims', href: '/insurance-claims' },
+    ]
+  },
+  {
+    id: 'admin',
+    name: 'Administration',
+    icon: BriefcaseIcon,
+    subItems: [
+      { name: 'HR & Payroll', href: '/hr-payroll' },
+      { name: 'Inventory', href: '/inventory' },
+      { name: 'Equipment Maintenance', href: '/maintenance' },
     ]
   },
   {
