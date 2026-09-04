@@ -22,7 +22,10 @@ import {
   ExclamationTriangleIcon,
   HeartIcon,
   RectangleStackIcon,
-  BriefcaseIcon
+  BriefcaseIcon,
+  QrCodeIcon,
+  BoltIcon,
+  MapIcon,
 } from '@heroicons/react/24/outline';
 
 const modules = [
@@ -92,11 +95,22 @@ const modules = [
     ]
   },
   {
+    id: 'smart',
+    name: '✨ Smart Features',
+    icon: SparklesIcon,
+    subItems: [
+      { name: '💓 Live Vital Signs', href: '/vitals' },
+      { name: '🏥 Hospital Floor Map', href: '/floor-map' },
+      { name: '🤖 AI Symptom Checker', href: '/symptom-checker' },
+      { name: '📲 Patient QR Code', href: '/patient-qr' },
+      { name: '🤖 AI Assistant', href: '/ai-assistant' },
+    ]
+  },
+  {
     id: 'tools',
     name: 'Tools & Settings',
     icon: Cog6ToothIcon,
     subItems: [
-      { name: 'AI Assistant', href: '/ai-assistant' },
       { name: 'Settings', href: '/settings' },
     ]
   }

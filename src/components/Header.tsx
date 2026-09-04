@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { useMobileNav } from '@/components/MobileNavProvider';
 import {
-  MagnifyingGlassIcon,
   BellIcon,
   ChatBubbleLeftEllipsisIcon,
   ArrowRightOnRectangleIcon,
@@ -13,6 +12,8 @@ import {
   MoonIcon,
   Bars3Icon
 } from '@heroicons/react/24/outline';
+import { CommandPaletteTrigger } from '@/components/CommandPalette';
+import { LangToggleButton } from '@/components/LangProvider';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -37,18 +38,13 @@ export default function Header() {
         </button>
 
         {/* Search Bar - Hidden on very small screens */}
-        <div className="hidden sm:flex items-center gap-3 flex-1 px-4 py-2.5 bg-bg-primary border border-border rounded-xl">
-          <MagnifyingGlassIcon className="w-5 h-5 text-text-muted shrink-0" />
-          <input
-            type="text"
-            placeholder="Search patients, appointments, doctors..."
-            className="flex-1 bg-transparent border-none text-text-primary outline-none text-sm placeholder:text-text-muted w-full"
-          />
-        </div>
+        {/* Command Palette Trigger */}
+        <CommandPaletteTrigger />
       </div>
 
       <div className="flex items-center gap-2">
-        {/* Theme Toggle */}
+        {/* Language Toggle */}
+        <LangToggleButton />
         {mounted && (
           <button
             className="w-10 h-10 flex items-center justify-center bg-transparent border border-border rounded-xl text-text-muted transition-all hover:bg-bg-primary hover:text-text-primary cursor-pointer"

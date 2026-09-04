@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Toaster } from 'react-hot-toast';
+import { CommandPalette } from '@/components/CommandPalette';
+import { EmergencyAlertOverlay, EmergencyAlertButton } from '@/components/EmergencyAlert';
+import { LangProvider } from '@/components/LangProvider';
 
 export const metadata: Metadata = {
   title: 'MediCare Pro | Hospital Management',
@@ -17,7 +20,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          {children}
+          <LangProvider>
+            <CommandPalette />
+            <EmergencyAlertOverlay />
+            {children}
+            <EmergencyAlertButton />
           <Toaster 
             position="bottom-right"
             toastOptions={{
@@ -45,6 +52,7 @@ export default function RootLayout({
               },
             }}
           />
+          </LangProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { MagnifyingGlassIcon, EllipsisVerticalIcon, UserPlusIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, UserPlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialDoctors = [
@@ -17,12 +17,17 @@ const initialDoctors = [
 export default function Doctors() {
   const [doctors, setDoctors] = useState(initialDoctors);
   const [searchQuery, setSearchQuery] = useState('');
+  const [specialtyFilter, setSpecialtyFilter] = useState('All');
+  const [statusFilter, setStatusFilter] = useState('All');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editItem, setEditItem] = useState<any>(null);
 
   const filteredDoctors = doctors.filter(
     (d) =>
-      d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      d.specialty.toLowerCase().includes(searchQuery.toLowerCase())
+      (d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.specialty.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      (specialtyFilter === 'All' || d.specialty === specialtyFilter) &&
+      (statusFilter === 'All' || d.status === statusFilter)
   );
 
   const handleAddDoctor = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,6 +50,28 @@ export default function Doctors() {
     setIsModalOpen(false);
   };
 
+  const handleEditDoctor = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editItem) return;
+    const formData = new FormData(e.currentTarget);
+    const updated = {
+      ...editItem,
+      name: formData.get('name') as string,
+      specialty: formData.get('specialty') as string,
+      phone: formData.get('phone') as string,
+      experience: formData.get('experience') as string + ' Years',
+      status: formData.get('status') as string,
+    };
+    setDoctors(doctors.map(d => d.id === editItem.id ? updated : d));
+    toast.success('Doctor updated!');
+    setEditItem(null);
+  };
+
+  const handleDelete = (id: string) => {
+    setDoctors(doctors.filter(d => d.id !== id));
+    toast.success('Doctor removed.');
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -55,15 +82,32 @@ export default function Doctors() {
       </div>
       
       <div className="glass-panel p-6 flex flex-col gap-6 min-h-[400px]">
-        <div className="flex items-center gap-3 px-4 py-3 bg-bg-primary border border-border rounded-xl text-text-muted">
-          <MagnifyingGlassIcon className="w-5 h-5" />
-          <input 
-            type="text" 
-            placeholder="Search doctors by name or specialty..." 
-            className="flex-1 bg-transparent border-none text-text-primary outline-none"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex items-center gap-3 px-4 py-3 bg-bg-primary border border-border rounded-xl text-text-muted flex-1">
+            <MagnifyingGlassIcon className="w-5 h-5 shrink-0" />
+            <input 
+              type="text" 
+              placeholder="Search doctors by name or specialty..." 
+              className="flex-1 bg-transparent border-none text-text-primary outline-none"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+          <select value={specialtyFilter} onChange={e => setSpecialtyFilter(e.target.value)} className="px-4 py-3 bg-bg-primary border border-border rounded-xl font-medium text-text-secondary outline-none focus:border-accent-light">
+            <option value="All">All Specialties</option>
+            <option value="General Medicine">General Medicine</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Dental">Dental</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Pediatrics">Pediatrics</option>
+          </select>
+          <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} className="px-4 py-3 bg-bg-primary border border-border rounded-xl font-medium text-text-secondary outline-none focus:border-accent-light">
+            <option value="All">All Statuses</option>
+            <option value="Available">Available</option>
+            <option value="In Surgery">In Surgery</option>
+            <option value="Off Duty">Off Duty</option>
+          </select>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-4">
@@ -78,9 +122,14 @@ export default function Doctors() {
                       <p className="text-sm text-text-secondary m-0">{doctor.specialty}</p>
                     </div>
                   </div>
-                  <button className="bg-transparent text-text-muted border-none cursor-pointer p-1 rounded-md transition-colors hover:bg-bg-secondary hover:text-text-primary">
-                    <EllipsisVerticalIcon className="w-5 h-5" />
-                  </button>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => setEditItem(doctor)} className="bg-transparent text-text-muted border-none cursor-pointer p-1.5 rounded-md transition-colors hover:bg-bg-secondary hover:text-accent-primary">
+                      <PencilSquareIcon className="w-5 h-5" />
+                    </button>
+                    <button onClick={() => handleDelete(doctor.id)} className="bg-transparent text-text-muted border-none cursor-pointer p-1.5 rounded-md transition-colors hover:bg-bg-secondary hover:text-red-500">
+                      <TrashIcon className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
                 
                 <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
@@ -116,36 +165,53 @@ export default function Doctors() {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Add New Doctor">
-        <form onSubmit={handleAddDoctor}>
-          <div className={formStyles.formGroup}>
-            <label>Full Name</label>
-            <input type="text" name="name" required placeholder="Dr. John Doe" />
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Specialty</label>
-            <select name="specialty" required>
-              <option value="General Medicine">General Medicine</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Dental">Dental</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Neurology">Neurology</option>
-              <option value="Pediatrics">Pediatrics</option>
-            </select>
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Experience (Years)</label>
-            <input type="number" name="experience" required placeholder="5" min="1" />
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Phone Number</label>
-            <input type="text" name="phone" required placeholder="+1 234-567-8900" />
-          </div>
-          <div className={formStyles.formActions}>
-            <button type="button" className={formStyles.cancelBtn} onClick={() => setIsModalOpen(false)}>Cancel</button>
-            <button type="submit" className={formStyles.submitBtn}>Add Doctor</button>
-          </div>
-        </form>
+        <DoctorForm onSubmit={handleAddDoctor} onClose={() => setIsModalOpen(false)} />
+      </Modal>
+      <Modal isOpen={!!editItem} onClose={() => setEditItem(null)} title="Edit Doctor">
+        {editItem && <DoctorForm defaultValues={editItem} onSubmit={handleEditDoctor} onClose={() => setEditItem(null)} />}
       </Modal>
     </div>
   );
 }
+
+const DoctorForm = ({ defaultValues, onSubmit, onClose }: { defaultValues?: any; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void; onClose: () => void }) => (
+  <form onSubmit={onSubmit}>
+    <div className={formStyles.formGroup}>
+      <label>Full Name</label>
+      <input type="text" name="name" required defaultValue={defaultValues?.name} placeholder="Dr. John Doe" />
+    </div>
+    <div className={formStyles.formGroup}>
+      <label>Specialty</label>
+      <select name="specialty" required defaultValue={defaultValues?.specialty}>
+        <option value="General Medicine">General Medicine</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Dental">Dental</option>
+        <option value="Orthopedics">Orthopedics</option>
+        <option value="Neurology">Neurology</option>
+        <option value="Pediatrics">Pediatrics</option>
+      </select>
+    </div>
+    <div className={formStyles.formGroup}>
+      <label>Experience (Years)</label>
+      <input type="number" name="experience" required defaultValue={defaultValues?.experience ? parseInt(defaultValues.experience) : undefined} placeholder="5" min="1" />
+    </div>
+    <div className={formStyles.formGroup}>
+      <label>Phone Number</label>
+      <input type="text" name="phone" required defaultValue={defaultValues?.phone} placeholder="+1 234-567-8900" />
+    </div>
+    {defaultValues && (
+      <div className={formStyles.formGroup}>
+        <label>Status</label>
+        <select name="status" defaultValue={defaultValues.status}>
+          <option value="Available">Available</option>
+          <option value="In Surgery">In Surgery</option>
+          <option value="Off Duty">Off Duty</option>
+        </select>
+      </div>
+    )}
+    <div className={formStyles.formActions}>
+      <button type="button" className={formStyles.cancelBtn} onClick={onClose}>Cancel</button>
+      <button type="submit" className={formStyles.submitBtn}>{defaultValues ? 'Save Changes' : 'Add Doctor'}</button>
+    </div>
+  </form>
+);

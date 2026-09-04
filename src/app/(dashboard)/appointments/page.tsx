@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { MagnifyingGlassIcon, EllipsisVerticalIcon, CalendarIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, EllipsisVerticalIcon, CalendarIcon, ClockIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
 
 const initialAppointments = [
@@ -17,13 +17,16 @@ const initialAppointments = [
 export default function Appointments() {
   const [appointments, setAppointments] = useState(initialAppointments);
   const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState('All');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editItem, setEditItem] = useState<any>(null);
 
   const filteredAppointments = appointments.filter(
     (a) =>
-      a.patient.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (a.patient.toLowerCase().includes(searchQuery.toLowerCase()) ||
       a.doctor.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      a.id.toLowerCase().includes(searchQuery.toLowerCase())
+      a.id.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      (statusFilter === 'All' || a.status === statusFilter)
   );
 
   const handleAddAppointment = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,6 +48,29 @@ export default function Appointments() {
     setAppointments([newApt, ...appointments]);
     toast.success('Appointment scheduled successfully!');
     setIsModalOpen(false);
+  };
+
+  const handleEditAppointment = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editItem) return;
+    const formData = new FormData(e.currentTarget);
+    const updated = {
+      ...editItem,
+      patient: formData.get('patient') as string,
+      doctor: formData.get('doctor') as string,
+      department: formData.get('department') as string,
+      date: formData.get('date') as string,
+      time: formData.get('time') as string,
+      status: formData.get('status') as string,
+    };
+    setAppointments(appointments.map(a => a.id === editItem.id ? updated : a));
+    toast.success('Appointment updated!');
+    setEditItem(null);
+  };
+
+  const handleDelete = (id: string) => {
+    setAppointments(appointments.filter(a => a.id !== id));
+    toast.success('Appointment removed.');
   };
 
   const getStatusClass = (status: string) => {
@@ -76,9 +102,20 @@ export default function Appointments() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+          <select 
+            value={statusFilter} 
+            onChange={e => setStatusFilter(e.target.value)} 
+            className="px-4 py-3 bg-bg-primary border border-border rounded-xl font-medium text-text-secondary outline-none focus:border-accent-light"
+          >
+            <option value="All">All Statuses</option>
+            <option value="Scheduled">Scheduled</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
           <div className="flex items-center gap-2 px-4 py-3 bg-bg-primary border border-border rounded-xl font-medium cursor-pointer transition-colors hover:border-border-focus whitespace-nowrap text-text-secondary">
             <CalendarIcon className="w-5 h-5" />
-            <span>Today, Nov 15</span>
+            <span>{new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
           </div>
         </div>
         
@@ -111,9 +148,14 @@ export default function Appointments() {
                     <span>{apt.time}</span>
                     <span className="text-text-muted font-normal border-l border-border pl-2 ml-2">{apt.date}</span>
                   </div>
-                  <button className="bg-transparent text-text-muted border-none cursor-pointer p-1 rounded-md transition-colors hover:bg-bg-secondary hover:text-text-primary">
-                    <EllipsisVerticalIcon className="w-5 h-5" />
-                  </button>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => setEditItem(apt)} className="bg-transparent text-text-muted border-none cursor-pointer p-1 rounded-md transition-colors hover:bg-bg-secondary hover:text-accent-primary">
+                      <PencilSquareIcon className="w-5 h-5" />
+                    </button>
+                    <button onClick={() => handleDelete(apt.id)} className="bg-transparent text-text-muted border-none cursor-pointer p-1 rounded-md transition-colors hover:bg-bg-secondary hover:text-red-500">
+                      <TrashIcon className="w-5 h-5" />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
@@ -126,39 +168,58 @@ export default function Appointments() {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Schedule Appointment">
-        <form onSubmit={handleAddAppointment}>
-          <div className={formStyles.formGroup}>
-            <label>Patient Name</label>
-            <input type="text" name="patient" required placeholder="John Doe" />
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Doctor Name</label>
-            <input type="text" name="doctor" required placeholder="Dr. Smith" />
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Department</label>
-            <select name="department" required>
-              <option value="General Medicine">General Medicine</option>
-              <option value="Cardiology">Cardiology</option>
-              <option value="Dental">Dental</option>
-              <option value="Orthopedics">Orthopedics</option>
-              <option value="Neurology">Neurology</option>
-            </select>
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Date</label>
-            <input type="date" name="date" required />
-          </div>
-          <div className={formStyles.formGroup}>
-            <label>Time</label>
-            <input type="time" name="time" required />
-          </div>
-          <div className={formStyles.formActions}>
-            <button type="button" className={formStyles.cancelBtn} onClick={() => setIsModalOpen(false)}>Cancel</button>
-            <button type="submit" className={formStyles.submitBtn}>Schedule</button>
-          </div>
-        </form>
+        <AptForm onSubmit={handleAddAppointment} onClose={() => setIsModalOpen(false)} />
+      </Modal>
+      <Modal isOpen={!!editItem} onClose={() => setEditItem(null)} title="Edit Appointment">
+        {editItem && <AptForm defaultValues={editItem} onSubmit={handleEditAppointment} onClose={() => setEditItem(null)} />}
       </Modal>
     </div>
   );
 }
+
+const AptForm = ({ defaultValues, onSubmit, onClose }: { defaultValues?: any; onSubmit: (e: React.FormEvent<HTMLFormElement>) => void; onClose: () => void }) => (
+  <form onSubmit={onSubmit}>
+    <div className={formStyles.formGroup}>
+      <label>Patient Name</label>
+      <input type="text" name="patient" required defaultValue={defaultValues?.patient} placeholder="John Doe" />
+    </div>
+    <div className={formStyles.formGroup}>
+      <label>Doctor Name</label>
+      <input type="text" name="doctor" required defaultValue={defaultValues?.doctor} placeholder="Dr. Smith" />
+    </div>
+    <div className={formStyles.formGroup}>
+      <label>Department</label>
+      <select name="department" required defaultValue={defaultValues?.department}>
+        <option value="General Medicine">General Medicine</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Dental">Dental</option>
+        <option value="Orthopedics">Orthopedics</option>
+        <option value="Neurology">Neurology</option>
+      </select>
+    </div>
+    <div className="grid grid-cols-2 gap-4">
+      <div className={formStyles.formGroup}>
+        <label>Date</label>
+        <input type="date" name="date" required defaultValue={defaultValues?.date} />
+      </div>
+      <div className={formStyles.formGroup}>
+        <label>Time</label>
+        <input type="time" name="time" required defaultValue={defaultValues?.time} />
+      </div>
+    </div>
+    {defaultValues && (
+      <div className={formStyles.formGroup}>
+        <label>Status</label>
+        <select name="status" defaultValue={defaultValues.status}>
+          {['Scheduled', 'In Progress', 'Completed', 'Cancelled'].map(s => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+      </div>
+    )}
+    <div className={formStyles.formActions}>
+      <button type="button" className={formStyles.cancelBtn} onClick={onClose}>Cancel</button>
+      <button type="submit" className={formStyles.submitBtn}>{defaultValues ? 'Save Changes' : 'Schedule'}</button>
+    </div>
+  </form>
+);

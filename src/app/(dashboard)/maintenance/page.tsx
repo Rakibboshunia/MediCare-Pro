@@ -188,7 +188,7 @@ export default function EquipmentMaintenance() {
                   <td className="px-5 py-4 text-text-primary font-semibold whitespace-nowrap">{eq.name}</td>
                   <td className="px-5 py-4 text-text-secondary whitespace-nowrap">{eq.department}</td>
                   <td className="px-5 py-4 text-text-secondary whitespace-nowrap">{eq.lastMaintained}</td>
-                  <td className="px-5 py-4 font-medium whitespace-nowrap" style={{ color: new Date(eq.nextMaintenance) <= new Date() ? 'var(--warning)' : undefined }}>{eq.nextMaintenance}</td>
+                  <td className="px-5 py-4 font-medium whitespace-nowrap" style={{ color: new Date(eq.nextMaintenance) <= new Date() ? 'var(--color-warning)' : undefined }}>{eq.nextMaintenance}</td>
                   <td className="px-5 py-4 whitespace-nowrap">
                     <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${STATUS_STYLES[eq.status]}`}>{eq.status}</span>
                   </td>

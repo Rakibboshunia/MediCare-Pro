@@ -21,6 +21,10 @@ import {
   DocumentTextIcon,
   BellAlertIcon,
 } from '@heroicons/react/24/outline';
+import { 
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
+  BarChart, Bar, Legend
+} from 'recharts';
 
 // Mini Sparkline Component
 function Sparkline({ data, color }: { data: number[]; color: string }) {
@@ -99,6 +103,16 @@ const upcomingOperations = [
   { id: 1, patient: 'Jahangir Alam', type: 'Knee Replacement', surgeon: 'Dr. Iftekhar Ahmed', time: '02:00 PM', ot: 'OT-1', priority: 'High' },
   { id: 2, patient: 'Shahnaz Akhter', type: 'Cataract Surgery', surgeon: 'Dr. Sabrina Sultana', time: '04:00 PM', ot: 'OT-2', priority: 'Medium' },
   { id: 3, patient: 'Kamal Uddin', type: 'Cardiac Bypass', surgeon: 'Dr. Karim Hossain', time: '06:30 PM', ot: 'OT-1', priority: 'Critical' },
+];
+
+const analyticsData = [
+  { month: 'Jan', patients: 420, revenue: 24 },
+  { month: 'Feb', patients: 510, revenue: 32 },
+  { month: 'Mar', patients: 450, revenue: 28 },
+  { month: 'Apr', patients: 680, revenue: 42 },
+  { month: 'May', patients: 750, revenue: 48 },
+  { month: 'Jun', patients: 820, revenue: 56 },
+  { month: 'Jul', patients: 950, revenue: 65 },
 ];
 
 export default function Dashboard() {
@@ -324,6 +338,64 @@ export default function Dashboard() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Advanced Analytics Charts (Recharts) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Patient Flow Area Chart */}
+        <div className="glass-panel p-6 h-[400px] flex flex-col">
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h2 className="text-lg font-bold text-text-primary">Patient Flow</h2>
+              <p className="text-sm text-text-muted mt-0.5">Monthly patient admissions trend</p>
+            </div>
+          </div>
+          <div className="flex-1 w-full min-h-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={analyticsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorPatients" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" />
+                <XAxis dataKey="month" stroke="var(--color-text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="var(--color-text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <RechartsTooltip 
+                  contentStyle={{ backgroundColor: 'var(--color-bg-card)', borderColor: 'var(--color-border)', borderRadius: '12px', color: 'var(--color-text-primary)' }}
+                  itemStyle={{ color: 'var(--color-text-primary)', fontWeight: 'bold' }}
+                />
+                <Area type="monotone" dataKey="patients" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorPatients)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        {/* Revenue Bar Chart */}
+        <div className="glass-panel p-6 h-[400px] flex flex-col">
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h2 className="text-lg font-bold text-text-primary">Revenue Overview</h2>
+              <p className="text-sm text-text-muted mt-0.5">Monthly earnings in thousands (৳)</p>
+            </div>
+          </div>
+          <div className="flex-1 w-full min-h-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={analyticsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" />
+                <XAxis dataKey="month" stroke="var(--color-text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="var(--color-text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <RechartsTooltip 
+                  cursor={{ fill: 'var(--color-bg-hover)' }}
+                  contentStyle={{ backgroundColor: 'var(--color-bg-card)', borderColor: 'var(--color-border)', borderRadius: '12px', color: 'var(--color-text-primary)' }}
+                  itemStyle={{ color: 'var(--color-text-primary)', fontWeight: 'bold' }}
+                />
+                <Bar dataKey="revenue" fill="#10b981" radius={[6, 6, 0, 0]} barSize={32} />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>

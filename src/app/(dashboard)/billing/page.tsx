@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { MagnifyingGlassIcon, DocumentTextIcon, BanknotesIcon, ArrowDownTrayIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, DocumentTextIcon, BanknotesIcon, ArrowDownTrayIcon, CheckCircleIcon, PlusIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
+import Modal, { formStyles } from '@/components/Modal';
 
 const initialInvoices = [
   { id: 'INV-2025-001', patient: 'Fatema Akter', date: '2025-07-10', amount: '৳ 2,500', status: 'Paid' },
@@ -18,6 +19,22 @@ export default function Billing() {
   const [invoices, setInvoices] = useState(initialInvoices);
   const [searchQuery, setSearchQuery] = useState('');
   const [isExporting, setIsExporting] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+
+  const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const newInv = {
+      id: `INV-2025-${String(invoices.length + 1).padStart(3, '0')}`,
+      patient: fd.get('patient') as string,
+      date: fd.get('date') as string || new Date().toISOString().split('T')[0],
+      amount: `৳ ${parseInt(fd.get('amount') as string).toLocaleString('en-US')}`,
+      status: 'Pending'
+    };
+    setInvoices([newInv, ...invoices]);
+    toast.success('Invoice created successfully!');
+    setIsAddOpen(false);
+  };
 
   const filteredInvoices = invoices.filter(
     (inv) =>
@@ -40,25 +57,31 @@ export default function Billing() {
   };
 
   // Calculate totals
-  const totalRevenue = invoices.filter(i => i.status === 'Paid').reduce((acc, curr) => acc + parseFloat(curr.amount.replace('$', '').replace(',', '')), 0);
-  const pendingAmount = invoices.filter(i => i.status === 'Pending').reduce((acc, curr) => acc + parseFloat(curr.amount.replace('$', '').replace(',', '')), 0);
-  const overdueAmount = invoices.filter(i => i.status === 'Overdue').reduce((acc, curr) => acc + parseFloat(curr.amount.replace('$', '').replace(',', '')), 0);
+  const parseAmount = (amt: string) => parseFloat(amt.replace(/[^\d.-]/g, ''));
+  const totalRevenue = invoices.filter(i => i.status === 'Paid').reduce((acc, curr) => acc + parseAmount(curr.amount), 0);
+  const pendingAmount = invoices.filter(i => i.status === 'Pending').reduce((acc, curr) => acc + parseAmount(curr.amount), 0);
+  const overdueAmount = invoices.filter(i => i.status === 'Overdue').reduce((acc, curr) => acc + parseAmount(curr.amount), 0);
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+    return `৳ ${amount.toLocaleString('en-US')}`;
   };
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-text-primary">Billing & Invoices</h1>
-        <button 
-          onClick={handleExport}
-          disabled={isExporting}
-          className="px-5 py-2.5 bg-bg-secondary text-text-primary border border-border rounded-xl font-semibold transition-colors hover:bg-border cursor-pointer flex items-center gap-2 disabled:opacity-50 text-sm sm:text-base whitespace-nowrap"
-        >
-          <ArrowDownTrayIcon className="w-5 h-5" /> {isExporting ? 'Exporting...' : 'Export Report'}
-        </button>
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={handleExport}
+            disabled={isExporting}
+            className="px-5 py-2.5 bg-bg-secondary text-text-primary border border-border rounded-xl font-semibold transition-colors hover:bg-border cursor-pointer flex items-center gap-2 disabled:opacity-50 text-sm sm:text-base whitespace-nowrap"
+          >
+            <ArrowDownTrayIcon className="w-5 h-5" /> {isExporting ? 'Exporting...' : 'Export'}
+          </button>
+          <button onClick={() => setIsAddOpen(true)} className="px-5 py-2.5 bg-accent-primary text-white rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 text-sm sm:text-base whitespace-nowrap">
+            <PlusIcon className="w-5 h-5" /> Create Invoice
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-2">
@@ -153,6 +176,27 @@ export default function Billing() {
           </table>
         </div>
       </div>
+
+      <Modal isOpen={isAddOpen} onClose={() => setIsAddOpen(false)} title="Create Invoice">
+        <form onSubmit={handleAdd}>
+          <div className={formStyles.formGroup}>
+            <label>Patient Name</label>
+            <input type="text" name="patient" required placeholder="e.g. Rahim Uddin" />
+          </div>
+          <div className={formStyles.formGroup}>
+            <label>Amount (৳)</label>
+            <input type="number" name="amount" required placeholder="e.g. 1500" min="0" step="1" />
+          </div>
+          <div className={formStyles.formGroup}>
+            <label>Date</label>
+            <input type="date" name="date" required defaultValue={new Date().toISOString().split('T')[0]} />
+          </div>
+          <div className={formStyles.formActions}>
+            <button type="button" className={formStyles.cancelBtn} onClick={() => setIsAddOpen(false)}>Cancel</button>
+            <button type="submit" className={formStyles.submitBtn}>Create Invoice</button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
