@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { SparklesIcon, ArrowRightIcon, ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/react/24/outline';
+import Modal, { formStyles } from './Modal';
+import { useAppointments } from '@/contexts/AppointmentsContext';
 
 interface Symptom {
   id: string;
@@ -77,11 +80,15 @@ function analyze(symptoms: string[]): Triage | null {
 }
 
 export default function SymptomChecker() {
+  const { addAppointment } = useAppointments();
   const [selected, setSelected] = useState<string[]>([]);
   const [result, setResult] = useState<Triage | null>(null);
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
+  
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDepartment, setSelectedDepartment] = useState('');
 
   const toggle = (id: string) => {
     setSelected(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
@@ -190,7 +197,14 @@ export default function SymptomChecker() {
             <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">Recommended Departments</p>
             <div className="flex flex-wrap gap-2">
               {result.departments.map(d => (
-                <button key={d} className="flex items-center gap-2 px-4 py-2 bg-accent-light text-accent-primary rounded-xl text-sm font-semibold hover:bg-accent-primary hover:text-white transition-colors cursor-pointer border-none">
+                <button 
+                  key={d} 
+                  onClick={() => {
+                    setSelectedDepartment(d);
+                    setShowModal(true);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 bg-accent-light text-accent-primary rounded-xl text-sm font-semibold hover:bg-accent-primary hover:text-white transition-colors cursor-pointer border-none"
+                >
                   {d} <ArrowRightIcon className="w-4 h-4" />
                 </button>
               ))}
@@ -207,6 +221,48 @@ export default function SymptomChecker() {
           <p className="mt-4 text-xs text-text-muted">⚠ This is an AI-assisted triage tool. Final diagnosis must be made by a qualified medical professional.</p>
         </div>
       )}
+
+      {/* Schedule Appointment Modal */}
+      <Modal isOpen={showModal} onClose={() => setShowModal(false)} title={`Schedule Appointment — ${selectedDepartment}`}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          const fd = new FormData(e.currentTarget);
+          addAppointment({
+            patient: fd.get('patient') as string,
+            doctor: fd.get('doctor') as string,
+            department: selectedDepartment,
+            date: fd.get('date') as string,
+            time: fd.get('time') as string,
+            status: 'Scheduled',
+          });
+          toast.success('Appointment scheduled successfully!');
+          setShowModal(false);
+        }}>
+          <p className="text-sm text-text-muted mb-4">Fill out the details below to schedule an appointment for the <strong>{selectedDepartment}</strong> department.</p>
+          <div className={formStyles.formGroup}>
+            <label>Patient Name</label>
+            <input type="text" name="patient" required defaultValue={name} placeholder="Enter patient name" />
+          </div>
+          <div className={formStyles.formGroup}>
+            <label>Doctor Name</label>
+            <input type="text" name="doctor" required placeholder="Dr. Smith" />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className={formStyles.formGroup}>
+              <label>Preferred Date</label>
+              <input type="date" name="date" required />
+            </div>
+            <div className={formStyles.formGroup}>
+              <label>Time</label>
+              <input type="time" name="time" required />
+            </div>
+          </div>
+          <div className={formStyles.formActions}>
+            <button type="button" onClick={() => setShowModal(false)} className={formStyles.cancelBtn}>Cancel</button>
+            <button type="submit" className={formStyles.submitBtn}>Confirm Schedule</button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }

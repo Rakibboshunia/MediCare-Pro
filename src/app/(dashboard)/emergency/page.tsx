@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import { 
   ExclamationTriangleIcon, PlusIcon, ClockIcon, HeartIcon,
-  TruckIcon, PhoneIcon, CheckCircleIcon, XMarkIcon
+  TruckIcon, PhoneIcon,
 } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
+import toast from 'react-hot-toast';
 
 type EmergencyCase = {
   id: string;

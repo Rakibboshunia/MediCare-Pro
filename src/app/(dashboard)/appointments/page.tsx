@@ -2,20 +2,12 @@
 
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { MagnifyingGlassIcon, EllipsisVerticalIcon, CalendarIcon, ClockIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, CalendarIcon, ClockIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline';
 import Modal, { formStyles } from '@/components/Modal';
-
-const initialAppointments = [
-  { id: 'APT-2501', patient: 'Fatema Akter', doctor: 'Dr. Rashida Khanam', department: 'General Medicine', date: '2025-07-15', time: '09:00 AM', status: 'Completed', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatema' },
-  { id: 'APT-2502', patient: 'Rafiqul Islam', doctor: 'Dr. Karim Hossain', department: 'Cardiology', date: '2025-07-15', time: '10:30 AM', status: 'In Progress', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rafiqul' },
-  { id: 'APT-2503', patient: 'Sumaiya Begum', doctor: 'Dr. Nusrat Jahan', department: 'Dental', date: '2025-07-15', time: '11:15 AM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sumaiya' },
-  { id: 'APT-2504', patient: 'Jahangir Alam', doctor: 'Dr. Iftekhar Ahmed', department: 'Orthopedics', date: '2025-07-16', time: '02:00 PM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jahangir' },
-  { id: 'APT-2505', patient: 'Nasrin Parvin', doctor: 'Dr. Sabrina Sultana', department: 'Neurology', date: '2025-07-16', time: '03:30 PM', status: 'Cancelled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nasrin' },
-  { id: 'APT-2506', patient: 'Mizanur Rahman', doctor: 'Dr. Mahbubur Rahman', department: 'Pediatrics', date: '2025-07-17', time: '09:45 AM', status: 'Scheduled', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Mizanur' },
-];
+import { useAppointments } from '@/contexts/AppointmentsContext';
 
 export default function Appointments() {
-  const [appointments, setAppointments] = useState(initialAppointments);
+  const { appointments, addAppointment, updateAppointment, deleteAppointment } = useAppointments();
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,20 +24,14 @@ export default function Appointments() {
   const handleAddAppointment = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const newId = `APT-10${appointments.length + 1}`;
-    
-    const newApt = {
-      id: newId,
+    addAppointment({
       patient: formData.get('patient') as string,
       doctor: formData.get('doctor') as string,
       department: formData.get('department') as string,
       date: formData.get('date') as string,
       time: formData.get('time') as string,
       status: 'Scheduled',
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${newId}`
-    };
-    
-    setAppointments([newApt, ...appointments]);
+    });
     toast.success('Appointment scheduled successfully!');
     setIsModalOpen(false);
   };
@@ -54,22 +40,20 @@ export default function Appointments() {
     e.preventDefault();
     if (!editItem) return;
     const formData = new FormData(e.currentTarget);
-    const updated = {
-      ...editItem,
+    updateAppointment(editItem.id, {
       patient: formData.get('patient') as string,
       doctor: formData.get('doctor') as string,
       department: formData.get('department') as string,
       date: formData.get('date') as string,
       time: formData.get('time') as string,
       status: formData.get('status') as string,
-    };
-    setAppointments(appointments.map(a => a.id === editItem.id ? updated : a));
+    });
     toast.success('Appointment updated!');
     setEditItem(null);
   };
 
   const handleDelete = (id: string) => {
-    setAppointments(appointments.filter(a => a.id !== id));
+    deleteAppointment(id);
     toast.success('Appointment removed.');
   };
 
@@ -195,6 +179,13 @@ const AptForm = ({ defaultValues, onSubmit, onClose }: { defaultValues?: any; on
         <option value="Dental">Dental</option>
         <option value="Orthopedics">Orthopedics</option>
         <option value="Neurology">Neurology</option>
+        <option value="Pulmonology">Pulmonology</option>
+        <option value="Emergency">Emergency</option>
+        <option value="Ophthalmology">Ophthalmology</option>
+        <option value="Rheumatology">Rheumatology</option>
+        <option value="Dermatology">Dermatology</option>
+        <option value="Gastroenterology">Gastroenterology</option>
+        <option value="Pediatrics">Pediatrics</option>
       </select>
     </div>
     <div className="grid grid-cols-2 gap-4">

@@ -151,7 +151,7 @@ export default function Dashboard() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <SparklesIcon className="w-5 h-5 text-amber-300" />
-              <span className="text-sm font-semibold tracking-wider text-white/90 uppercase">{greeting}</span>
+              <span suppressHydrationWarning className="text-sm font-semibold tracking-wider text-white/90 uppercase">{greeting}</span>
             </div>
             <h1 className="text-2xl md:text-4xl font-extrabold mb-2 text-white">Welcome, Dr. Boshunia</h1>
             <p className="text-white/80 text-sm md:text-base">
@@ -159,10 +159,10 @@ export default function Dashboard() {
             </p>
           </div>
           <div className="flex flex-col items-end gap-2 shrink-0">
-            <div className="text-3xl md:text-4xl font-mono font-bold tracking-wider tabular-nums">
+            <div suppressHydrationWarning className="text-3xl md:text-4xl font-mono font-bold tracking-wider tabular-nums">
               {currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
             </div>
-            <div className="text-sm text-white/70 font-medium">
+            <div suppressHydrationWarning className="text-sm text-white/70 font-medium">
               {currentTime.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </div>
             <button 

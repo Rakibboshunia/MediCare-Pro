@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -7,26 +6,15 @@ import { useState, useEffect } from 'react';
 import {
   HomeIcon,
   UsersIcon,
-  CalendarIcon,
   DocumentTextIcon,
-  ChartBarIcon,
   Cog6ToothIcon,
-  UserCircleIcon,
   CreditCardIcon,
-  BeakerIcon,
-  ChatBubbleLeftRightIcon,
-  ClipboardDocumentCheckIcon,
   SparklesIcon,
-  UserGroupIcon,
-  TruckIcon,
-  ExclamationTriangleIcon,
   HeartIcon,
-  RectangleStackIcon,
   BriefcaseIcon,
-  QrCodeIcon,
-  BoltIcon,
-  MapIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { useMobileNav } from '@/components/MobileNavProvider';
 
 const modules = [
   {
@@ -116,8 +104,6 @@ const modules = [
   }
 ];
 
-import { useMobileNav } from '@/components/MobileNavProvider';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -130,7 +116,7 @@ export default function Sidebar() {
   // Update active module if pathname changes and it's in a different module
   useEffect(() => {
     const currentModule = modules.find(m => m.subItems.some(sub => pathname === sub.href));
-    if (currentModule && currentModule.id !== activeModule.id) {
+    if (currentModule) {
       setActiveModule(currentModule);
     }
   }, [pathname]);
@@ -217,8 +203,8 @@ export default function Sidebar() {
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg font-medium text-sm transition-all ${isActive
-                      ? 'bg-accent-primary/10 text-accent-primary'
-                      : 'text-text-secondary hover:bg-bg-primary hover:text-text-primary'
+                    ? 'bg-accent-primary/10 text-accent-primary'
+                    : 'text-text-secondary hover:bg-bg-primary hover:text-text-primary'
                     }`}
                 >
                   {item.name}
