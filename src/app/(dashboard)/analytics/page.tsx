@@ -1,12 +1,14 @@
+
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { 
   ChartBarIcon, ArrowTrendingUpIcon, UsersIcon, ArrowDownTrayIcon, 
   CurrencyDollarIcon, HeartIcon, CalendarIcon, ClockIcon,
   ArrowTrendingDownIcon, UserGroupIcon
 } from '@heroicons/react/24/outline';
-import toast from 'react-hot-toast';
+
 
 // Mini Bar Chart Component
 function BarChart({ data, labels, color }: { data: number[]; labels: string[]; color: string }) {
