@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -86,6 +87,7 @@ export default function Appointments() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+          
           <select 
             value={statusFilter} 
             onChange={e => setStatusFilter(e.target.value)} 
@@ -97,6 +99,7 @@ export default function Appointments() {
             <option value="Completed">Completed</option>
             <option value="Cancelled">Cancelled</option>
           </select>
+          
           <div className="flex items-center gap-2 px-4 py-3 bg-bg-primary border border-border rounded-xl font-medium cursor-pointer transition-colors hover:border-border-focus whitespace-nowrap text-text-secondary">
             <CalendarIcon className="w-5 h-5" />
             <span>{new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
