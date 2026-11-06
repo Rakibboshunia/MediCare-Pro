@@ -110,12 +110,14 @@ export default function BedManagement() {
           <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-600 to-emerald-600 dark:from-teal-400 dark:to-emerald-400">Bed Management</h1>
           <p className="text-sm text-text-muted mt-2 font-medium">Real-time bed availability, patient allocation, and ward status</p>
         </div>
+        
         <button 
           onClick={() => setIsModalOpen(true)}
           className="px-6 py-3 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white rounded-xl font-bold transition-all transform hover:scale-105 shadow-lg shadow-teal-500/30 cursor-pointer flex items-center gap-2 text-sm border-none"
         >
           <PlusIcon className="w-5 h-5" /> Add Bed
         </button>
+        
       </div>
 
       {/* Summary Cards */}
@@ -132,6 +134,7 @@ export default function BedManagement() {
           </div>
           <span className="text-xs text-text-secondary font-bold uppercase tracking-wider">Occupancy</span>
         </div>
+        
         {[
           { label: 'Total Beds', value: totalBeds, color: 'from-indigo-500 to-indigo-700', bg: 'bg-indigo-500/10' },
           { label: 'Available', value: available, color: 'from-emerald-400 to-emerald-600', bg: 'bg-emerald-500/10' },
@@ -154,10 +157,12 @@ export default function BedManagement() {
             <input type="text" placeholder="Search bed ID or patient..." className="flex-1 bg-transparent border-none text-text-primary outline-none placeholder:text-text-muted/70"
               value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           </div>
+          
           <select className="px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 rounded-xl text-text-primary font-medium outline-none cursor-pointer shadow-sm transition-all"
             value={filterWard} onChange={(e) => setFilterWard(e.target.value)}>
             {wards.map(w => <option key={w}>{w}</option>)}
           </select>
+          
           <select className="px-5 py-3.5 bg-bg-primary/50 backdrop-blur-md border border-border focus:border-teal-500/50 focus:ring-2 focus:ring-teal-500/20 rounded-xl text-text-primary font-medium outline-none cursor-pointer shadow-sm transition-all"
             value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
             {statuses.map(s => <option key={s}>{s}</option>)}
