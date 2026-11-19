@@ -1,8 +1,6 @@
-
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-
 interface VitalConfig {
   label: string;
   unit: string;
